@@ -8,6 +8,7 @@
   <name>item-ssm Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+    <!-- hamcrest-core包是junit的依赖包 -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -17,6 +18,7 @@
   </dependencies>
   <build>
     <plugins>
+      <!-- jetty:run服务器插件依赖 -->
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
@@ -37,6 +39,20 @@
         </configuration>
       </plugin>
     </plugins>
+    <!--  编译部署文件名需要与artifact中out directory一致  -->
     <finalName>item-ssm</finalName>
+    <!-- 编译需要指定编译源文件和编译输出目标目录，这里指定编译源文件 -->
+    <!-- 配置需编译文件目录，浏览器访问时的都是编译后的文件，所以如果访问的文件没有编译则会找不到资源 -->
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/webapp</directory>
+      </resource>
+    </resources>
   </build>
 </project>

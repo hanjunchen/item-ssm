@@ -1,0 +1,21 @@
+新建maven项目必要步骤：
+1、新建maven-archetype-webapp项目
+2、指定groupId：com.hsgene
+   指定artifactId:xxx(项目名)
+   指定project name:xxx(和artifactId一样)
+3、设置JDK版本
+4、设置编码
+5、pom中添加jetty:run服务器插件依赖
+6、创建java目录指定为源文件目录，指定resources为资源文件目录
+7、指定需编译的源文件目录
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/webapp</directory>
+      </resource>
+    </resources>
