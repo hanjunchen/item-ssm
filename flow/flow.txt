@@ -7,7 +7,7 @@
 4、设置编码
 5、pom中添加jetty:run服务器插件依赖
 6、创建java目录指定为源文件目录，指定resources为资源文件目录
-7、指定需编译的源文件目录
+7、指定需编译的源文件目录:
     <resources>
       <resource>
         <directory>src/main/java</directory>
@@ -19,3 +19,15 @@
         <directory>src/main/webapp</directory>
       </resource>
     </resources>
+8、项目根目录下创建.gitignore文件:
+    .project
+    .class
+    .war
+    .zip
+    .rar
+    .idea
+    *.iml
+    /target/*
+    /src/main/webapp/WEB-INF/classes/*
+    /target/
+9、share项目到GitHub
