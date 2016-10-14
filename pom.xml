@@ -15,6 +15,22 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- 提供支持@ResponseBody等注解，Controller中json对象的前后台解析，下面三个依赖缺一不可，jar包只有一个(jackson-all.jar)依赖有三个 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.7.3</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
