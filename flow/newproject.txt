@@ -30,4 +30,4 @@
     /target/*
     /src/main/webapp/WEB-INF/classes/*
     /target/
-9、share项目到GitHub
+9、share项目到GitHub(checkout项目时选择Git不选择GitHub)
