@@ -1,6 +1,6 @@
-package hsgene.common;
+package com.hsgene.common;
 
-import hsgene.entity.Employee;
+import com.hsgene.entity.Employee;
 
 import java.util.List;
 

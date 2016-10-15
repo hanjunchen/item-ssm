@@ -1,6 +1,6 @@
 新建maven项目必要步骤：
 1、新建maven-archetype-webapp项目
-2、指定groupId：com.hsgene
+2、指定groupId：com.com.hsgene
    指定artifactId:xxx(项目名)
    指定project name:xxx(和artifactId一样)
 3、设置JDK版本

@@ -7,7 +7,7 @@ spring容器即spring上下文就是一个大的类，所有的配置在其中�
 spring注解
 类注解表示将bean的实例化工作交给spring
 属性注解表示将该属性注入到spring中的当前bean
-也就是说：当通过ApplicationContext实例化一个@Controller标注的对象时---而真正的web项目中，这个过程是由spring自动获取的
+也就是说：当通过ApplicationContext实例化一个@Controller标注的对象时---而ApplicationContext的初始化交给了web容器
 其中@Autowired注解的属性都已经注入进来并且被实例化，依次直到DAO层都是自动装配和注入
 所以实际项目中基本不需要使用ApplicationContext对象
 使用一个类其实需要两步：将其加入spring容器、通过spring再将其注入给某个bean的属性
@@ -19,3 +19,4 @@ spring注解
 要想注入接口必须使用MapperScannerConfigurer来扫描接口（这样就是注入的接口实现类xml文件）
 
 spring和springMVC父子容器关系
+web.xml是最大的容器

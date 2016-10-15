@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/tx/spring-aop-4.0.xsd">
 
        <!-- 这里和spring-mvc扫描注解功能重复，所以需要分别配置两个的include和exclude，针对Controller类 -->
-       <context:component-scan base-package="hsgene">
+       <context:component-scan base-package="com.hsgene">
               <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
        </context:component-scan>
        <!-- 读取properties配置文件 -->
@@ -55,10 +55,10 @@
        <!-- 该对象就是Dao的实现类，将其注入到Service类中使用，所以每个Dao都需要配置一个MapperFactoryBean，比较麻烦 -->
        <bean id="employeeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
               <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-              <property name="mapperInterface" value="hsgene.dao.EmployeeDao"/>
+              <property name="mapperInterface" value="com.hsgene.dao.EmployeeDao"/>
        </bean>
        <!-- MapperFactoryBean方式必须在xml中给service注入属性 -->
-       <bean id="employeeService" class="hsgene.service.EmployeeService">
+       <bean id="employeeService" class="com.hsgene.service.EmployeeService">
               <property name="employeeDao" ref="employeeDao"/>
        </bean>
 

@@ -1,4 +1,4 @@
-package hsgene.entity;
+package com.hsgene.entity;
 
 import lombok.Getter;
 import lombok.Setter;

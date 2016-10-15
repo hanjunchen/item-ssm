@@ -1,8 +1,21 @@
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- web-app2.5schema对标签的顺序没有要求，2.2有固定顺序，2.5实现了许多新功能 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
     <display-name>Archetype Created Web Application</display-name>
+    <!-- 由web容器初始化spring容器 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-context.xml</param-value>
+    </context-param>
+    <!-- 用于监听web容器启动，启动时加载contextConfigLocation来启动spring容器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 这样就可以处理中文的post请求，get中文请求需要在服务器的server.xml中设置encodingURI，放在第一位，用于第一次拦截 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -30,7 +43,7 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <!-- idea的classpath是resources目录 -->
-            <param-value>classpath*:/spring-mvc*.xml</param-value>
+            <param-value>classpath*:spring-mvc*.xml</param-value>
         </init-param>
         <!-- 优先级设为1，最高级别，启动容器第一个初始化  -->
         <load-on-startup>1</load-on-startup>

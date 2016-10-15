@@ -1,7 +1,7 @@
-package hsgene.test;
+package com.hsgene.test;
 
-import hsgene.entity.Employee;
-import hsgene.service.EmployeeService;
+import com.hsgene.entity.Employee;
+import com.hsgene.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,7 +34,7 @@ public class JunitTest {
 
     @Test
     public void testFindList(){
-        List<Employee> list = sqlSessionTemplate.selectList("hsgene.dao.EmployeeDao.findList");
+        List<Employee> list = sqlSessionTemplate.selectList("com.hsgene.dao.EmployeeDao.findList");
         list.forEach(x-> System.out.println(x.getName()));
     }
 
