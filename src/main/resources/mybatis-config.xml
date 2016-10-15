@@ -15,7 +15,7 @@
     <typeAliases>
         <!--<typeAlias type="com.hsgene.entity.User" alias="User" />-->
         <!-- resultType和paramterType就可以不用写完全限定名 -->
-        <package name="com.hsgene.entity"/>
+        <package name="hsgene.entity"/>
     </typeAliases>
 
     <!-- 剩余的配置都交给spring管理 -->
