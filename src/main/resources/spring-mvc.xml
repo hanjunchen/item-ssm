@@ -36,6 +36,7 @@
         <!-- exceptionMappings属性是Properties类型，即K-V键值对，抛出特定异常就跳到特定页面 -->
         <property name="exceptionMappings">
             <props>
+                <!-- 逻辑视图名 -->
                 <prop key="java.lang.Throwable">../error</prop>
             </props>
         </property>

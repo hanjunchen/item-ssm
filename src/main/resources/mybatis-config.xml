@@ -13,9 +13,11 @@
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
     <typeAliases>
+        <!-- 当需要给特定的entity指定别名时，需要使用这里的typeAlias标签 -->
         <!--<typeAlias type="com.com.hsgene.entity.User" alias="User" />-->
         <!-- resultType和paramterType就可以不用写完全限定名 -->
-        <package name="com.hsgene.entity"/>
+        <!-- 别名指定也被spring接管 -->
+        <!--<package name="com.hsgene.entity"/>-->
     </typeAliases>
 
     <!-- 剩余的配置都交给spring管理 -->

@@ -43,6 +43,8 @@
        <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
               <property name="dataSource" ref="dataSource"/>
+              <!-- 这里指定类别名后，mybatis-config.xml中就不需要再指定了 -->
+              <property name="typeAliasesPackage" value="com.hsgene"/>
               <property name="configLocation" value="classpath:mybatis-config.xml"/>
               <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
        </bean>
@@ -61,5 +63,12 @@
        <bean id="employeeService" class="com.hsgene.service.EmployeeService">
               <property name="employeeDao" ref="employeeDao"/>
        </bean>
+
+       <!-- 扫描basePackage下的Mapper接口,如果com.hsgene.dao包下并不完全是我们定义的Mapper接口，我们也可以通过自定义注解的方式指定生成MapperFactoryBean对象 -->
+       <!-- 此种方法也是基于MapperFactoryBean方法 -->
+       <!--<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+              <property name="basePackage" value="com.hsgene.dao" />
+              <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+       </bean>-->
 
 </beans>
