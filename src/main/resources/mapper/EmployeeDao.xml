@@ -6,7 +6,7 @@
         SELECT * FROM employee
     </select>
 
-    <select id="getById" resultType="Employee" parameterType="String">
+    <select id="getById" resultType="Employee">
         select * from employee WHERE id = #{id}
     </select>
 

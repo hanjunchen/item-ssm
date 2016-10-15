@@ -1,0 +1,7 @@
+DAO和mapper.xml映射：通过namespace两者映射，xml就是DAO的实现类
+在spring中接管mybatis时的三种方法：SqlSessionTemplate、MapperFactoryBean、MapperScannerConfigurer
+第一种和第三种都是直接把mapper.xml即实现类交给spring管理
+第二种方法则是把DAO交给spring管理
+所以三种方法的本质是一样的，因为DAO和xml已经联系在一起了，
+不过第二种方法易于理解：在每个DAO的MapperFactoryBean中注入SqlSessionFactory和其DAO实现类（xml文件），
+即MapperFactoryBean就是再次封装了接口实现类（sqlSession.getMapper()）

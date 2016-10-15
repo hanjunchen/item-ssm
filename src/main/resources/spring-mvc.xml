@@ -10,8 +10,10 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- 容器扫描@Controller注解的类来处理请求，base-package如果多个用“,”分隔，该方式基于DefaultAnnotationHandlerMapping类 -->
-    <context:component-scan base-package="com.hsgene"/>
-    <!-- 开启注解映射 -->
+    <context:component-scan base-package="hsgene.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 开启MVC注解映射 -->
     <mvc:annotation-driven/>
 
     <!-- 配置视图解析器，最常用解析器 ,解析ModelAndView对象返回的逻辑视图名，根据这里配置的前缀和后缀对匹配的视图进行解析 -->
@@ -27,7 +29,7 @@
 
     <!-- 第二种映射静态资源文件方法，/statics/下的请求映射到/statics/**所有的文件包括子文件（*不包含子文件，**包含子文件） -->
     <!-- 二选一，该种方法可以映射指定目录下的静态资源，并且还可以指定缓存静态资源时间，31536000是1年 -->
-    <mvc:resources mapping="/statics/**" location="/statics/" cache-period="31536000"/>
+    <mvc:resources mapping="/statics/**" location="classpath:statics" cache-period="31536000"/>
 
     <!-- 配置处理全局异常类，需要关闭局部异常注解@HandlerException，否则局部异常优先 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

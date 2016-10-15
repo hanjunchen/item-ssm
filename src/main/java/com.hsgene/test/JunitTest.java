@@ -1,6 +1,7 @@
 package com.hsgene.test;
 
 import com.hsgene.entity.Employee;
+import com.hsgene.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,6 +19,8 @@ public class JunitTest {
 
     protected ApplicationContext applicationContext;
 
+    private EmployeeService employeeService;
+
     @Before
     public void setup(){
         //  获取spring容器上下文
@@ -26,11 +29,18 @@ public class JunitTest {
         //  所以只有从spring中拿到的SqlSessionTemplate才是我们需要的
         //  每次访问数据库都会实例化一个SqlSessionTemplate
         sqlSessionTemplate = applicationContext.getBean(SqlSessionTemplate.class);
+        employeeService = (EmployeeService) applicationContext.getBean("employeeService");
     }
 
     @Test
     public void testFindList(){
         List<Employee> list = sqlSessionTemplate.selectList("com.hsgene.dao.EmployeeDao.findList");
         list.forEach(x-> System.out.println(x.getName()));
+    }
+
+    @Test
+    public void testGetById(){
+        Employee employee = employeeService.getById(String.valueOf(1000));
+        System.out.println(employee.getName());
     }
 }
