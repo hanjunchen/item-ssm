@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsgene.dao.EmployeeDao">
+
+    <select id="findList" resultType="Employee">
+        SELECT * FROM employee
+    </select>
+
+    <select id="getById" resultType="Employee" parameterType="String">
+        select * from employee WHERE id = #{id}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO employee(
+        name,
+        sex,
+        job,
+        access_level,
+        identity_card,
+        dept_no,
+        create_date
+        )
+        VALUES (
+        #{name},
+        #{sex},
+        #{job},
+        #{accessLevel},
+        #{identityCard},
+        #{deptNo},
+        #{createDate}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE employee SET
+        name = #{name},
+        dept_no = #{deptNo}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+      DELETE FROM employee WHERE id = #{id}
+    </delete>
+
+    <!-- 使用foreach标签可以在insert、update、delete语句中进行批量增删改 -->
+</mapper>

@@ -31,3 +31,7 @@
     /src/main/webapp/WEB-INF/classes/*
     /target/
 9、share项目到GitHub(checkout项目时选择Git不选择GitHub)
+10、创建数据库
+11、pom导入依赖
+12、添加配置文件mybatis-config.xml、spring-context.xml、spring-mvc.xml、db.properties、log4j.properties、web.xml
+13、添加实体类、dao、mapper.xml

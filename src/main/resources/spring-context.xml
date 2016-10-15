@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/tx/spring-aop-4.0.xsd">
+
+       <!-- 读取properties配置文件 -->
+       <context:property-placeholder location="classpath:db.properties"/>
+       <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
+       <!-- 配置数据源，使用dbcp连接池,指定应用停止后数据源销毁方法，连接池对象为单例 -->
+       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
+              <property name="driverClassName" value="${driver}"/>
+              <property name="url" value="${url}"/>
+              <property name="username" value="${username}"/>
+              <property name="password" value="${password}"/>
+       </bean>
+       <!-- 使用数据源配置事务管理，使用的时候使用注解@Transactional或AOP方式 -->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+       <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+       <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+       <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，基于工厂模式 -->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+              <property name="dataSource" ref="dataSource"/>
+              <property name="configLocation" value="classpath:mybatis-config.xml"/>
+              <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+       </bean>
+       <!-- 三种操作是数据库方式：SqlSessionTemplate、、 -->
+       <!-- 使用SqlSessionTemplate方式操作数据库，其就是实现的SqlSession接口 -->
+       <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+              <!-- 注意这是使用的构造方法注入的属性 -->
+              <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+       </bean>
+       <!-- 然后使用sqlSessionTemplate时，可以在这里使用bean注入也可以在类中使用注解注入 -->
+
+</beans>
