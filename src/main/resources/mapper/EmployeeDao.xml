@@ -2,11 +2,19 @@
 <mapper namespace="com.hsgene.dao.EmployeeDao">
 
     <select id="findList" resultType="Employee">
-        SELECT * FROM employee
+        SELECT
+         e.id AS "id",
+         e.name AS "name",
+         e.sex AS "sex",
+         e.job AS "job",
+         e.identity_card AS "identityCard",
+         e.dept_no AS "deptNo",
+         e.create_date AS "createDate"
+         FROM employee e
     </select>
 
     <select id="getById" resultType="Employee">
-        select * from employee where id = #{id}
+        select * from employee e where id = #{id}
     </select>
 
     <insert id="insert">
