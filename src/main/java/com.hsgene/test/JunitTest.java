@@ -22,7 +22,7 @@ public class JunitTest {
     public void setup(){
         //  获取spring容器上下文
         applicationContext = new ClassPathXmlApplicationContext("spring-context.xml");
-        //  SqlSessionTemplate存在于spring中，并且spring中的SqlSessionTemplate被注入了需要的属性，
+        //  SqlSessionTemplate存在于spring中，而spring中的SqlSessionTemplate已被注入了相应的属性，
         //  所以只有从spring中拿到的SqlSessionTemplate才是我们需要的
         //  每次访问数据库都会实例化一个SqlSessionTemplate
         sqlSessionTemplate = applicationContext.getBean(SqlSessionTemplate.class);

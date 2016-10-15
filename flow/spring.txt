@@ -4,7 +4,6 @@ spring容器即spring上下文就是一个大的类，所有的配置在其中�
 在项目启动时spring配置文件中的对象有些会直接被实例化，作为单例使用，
 交给spring管理后所有bean的实例化都可以由spring提供的注解或api来完成
 
-
 spring注解
 类注解表示将bean的实例化工作交给spring
 属性注解表示将该属性注入到spring中的当前bean
@@ -13,3 +12,5 @@ spring注解
 所以实际项目中基本不需要使用ApplicationContext对象
 使用一个类其实需要两步：将其加入spring容器、通过spring再将其注入给某个bean的属性
 注解可以装配类也可以注入属性、bean标签可以同时进行装配和注入（如果是通过property注入则必须有setter/getter方法）
+所以bean标签的优势就是可以不修改源文件的情况下进行装配注入---对于引用的外部包很有用，然后再配合ApplicationContext来使用外部接口，
+这是注解方式不能代替的

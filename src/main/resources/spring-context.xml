@@ -26,13 +26,13 @@
        </bean>
        <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
        <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-       <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，基于工厂模式 -->
+       <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
               <property name="dataSource" ref="dataSource"/>
               <property name="configLocation" value="classpath:mybatis-config.xml"/>
               <property name="mapperLocations" value="classpath:mapper/*.xml"/>
        </bean>
-       <!-- 三种操作是数据库方式：SqlSessionTemplate、MapperFactoryBean、 -->
+       <!-- 三种操作是数据库方式：SqlSessionTemplate、MapperFactoryBean、MapperScannerConfigurer -->
        <!-- 使用SqlSessionTemplate方式操作数据库，其就是实现的SqlSession接口 -->
        <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
               <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
