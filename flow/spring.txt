@@ -11,7 +11,7 @@ spring注解
 其中@Autowired注解的属性都已经注入进来并且被实例化，依次直到DAO层都是自动装配和注入
 所以实际项目中基本不需要使用ApplicationContext对象
 使用一个类其实需要两步：将其加入spring容器、通过spring再将其注入给某个bean的属性
-注解可以装配类也可以注入属性、bean标签可以同时进行装配和注入（如果是通过property注入则必须有setter/getter方法）
+注解可以装配类也可以注入属性、bean标签可以同时进行装配和注入（如果是通过property注入则必须有setter方法，注解方法不用）
 所以bean标签的优势就是可以不修改源文件的情况下进行装配注入---对于引用的外部包很有用，然后再配合ApplicationContext来使用外部接口，
 这是注解方式不能代替的
 

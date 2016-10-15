@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- 容器扫描@Controller注解的类来处理请求，base-package如果多个用“,”分隔，该方式基于DefaultAnnotationHandlerMapping类 -->
-    <context:component-scan base-package="hsgene.controller">
+    <context:component-scan base-package="hsgene">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!-- 开启MVC注解映射 -->

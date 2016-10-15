@@ -1,6 +1,6 @@
-package com.hsgene.dao;
+package hsgene.dao;
 
-import com.hsgene.entity.Employee;
+import hsgene.entity.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

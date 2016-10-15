@@ -1,8 +1,8 @@
-package com.hsgene.service;
+package hsgene.service;
 
-import com.hsgene.common.BaseService;
-import com.hsgene.dao.EmployeeDao;
-import com.hsgene.entity.Employee;
+import hsgene.common.BaseService;
+import hsgene.dao.EmployeeDao;
+import hsgene.entity.Employee;
 
 import java.util.List;
 
