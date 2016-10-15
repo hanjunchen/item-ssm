@@ -11,9 +11,11 @@
 
     <!-- 容器扫描@Controller注解的类来处理请求，base-package如果多个用“,”分隔，该方式基于DefaultAnnotationHandlerMapping类 -->
     <context:component-scan base-package="com.hsgene">
+        <!-- 子容器只需要扫描@Controller注解 -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-    <!-- 开启MVC注解映射 -->
+    <!-- 开启MVC注解映射驱动，当请求context:component-scan扫描的类时，spring注入HandlerMapping等驱动类来映射请求url
+     也就是说该标签就是为控制器注入DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean-->
     <mvc:annotation-driven/>
 
     <!-- 配置视图解析器，最常用解析器 ,解析ModelAndView对象返回的逻辑视图名，根据这里配置的前缀和后缀对匹配的视图进行解析 -->

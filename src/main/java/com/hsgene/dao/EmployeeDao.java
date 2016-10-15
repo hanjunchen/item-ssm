@@ -13,6 +13,7 @@ public interface EmployeeDao {
 
     //  多个参数时才需要@param注解
     Employee getById(String id);
+
     //  mybatis中的增删改操作都默认返回受影响的行数
     int insert(Employee employee);
 

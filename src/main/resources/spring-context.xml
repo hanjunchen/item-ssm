@@ -10,65 +10,68 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/tx/spring-aop-4.0.xsd">
 
-       <!-- 这里和spring-mvc扫描注解功能重复，所以需要分别配置两个的include和exclude，针对Controller类 -->
-       <context:component-scan base-package="com.hsgene">
-              <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-       </context:component-scan>
-       <!-- 读取properties配置文件 -->
-       <context:property-placeholder location="classpath:db.properties"/>
-       <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
-       <!-- 配置dbcp数据源，带连接池，指定应用停止后数据源销毁方法，数据源对象为单例 -->
-       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
-              <property name="driverClassName" value="${driver}"/>
-              <property name="url" value="${url}"/>
-              <property name="username" value="root"/>
-              <property name="password" value="${password}"/>
-              <!-- 配置初始化大小、最小、最大 -->
-              <property name="initialSize" value="1" />
-              <property name="minIdle" value="3" />
-              <property name="maxActive" value="20" />
-              <!-- 配置获取连接等待超时的时间 -->
-              <property name="maxWait" value="60000" />
-              <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-              <property name="timeBetweenEvictionRunsMillis" value="60000" />
-              <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-              <property name="minEvictableIdleTimeMillis" value="300000" />
-       </bean>
-       <!-- 使用数据源配置事务管理，使用的时候使用注解@Transactional或AOP方式 -->
-       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-              <property name="dataSource" ref="dataSource"/>
-       </bean>
-       <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
-       <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-       <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
-       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-              <property name="dataSource" ref="dataSource"/>
-              <!-- 这里指定类别名后，mybatis-config.xml中就不需要再指定了 -->
-              <property name="typeAliasesPackage" value="com.hsgene"/>
-              <property name="configLocation" value="classpath:mybatis-config.xml"/>
-              <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
-       </bean>
-       <!-- 三种操作是数据库方式：SqlSessionTemplate、MapperFactoryBean、MapperScannerConfigurer -->
-       <!-- 使用SqlSessionTemplate方式操作数据库，其就是实现的SqlSession接口 -->
-       <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-              <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
-       </bean>
-       <!-- 此种方式使用mapperInterface属性代替SqlSessionFactoryBean中的mapperLocations属性 -->
-       <!-- 该对象就是Dao的实现类，将其注入到Service类中使用，所以每个Dao都需要配置一个MapperFactoryBean，比较麻烦 -->
-       <bean id="employeeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-              <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-              <property name="mapperInterface" value="com.hsgene.dao.EmployeeDao"/>
-       </bean>
-       <!-- MapperFactoryBean方式必须在xml中给service注入属性 -->
-       <bean id="employeeService" class="com.hsgene.service.EmployeeService">
-              <property name="employeeDao" ref="employeeDao"/>
-       </bean>
+    <!-- 这里和spring-mvc扫描注解功能重复，所以需要分别配置两个的include和exclude，针对Controller类，而且该标签包含了context:annotation-config标签的功能 -->
+    <context:component-scan base-package="com.hsgene">
+        <!-- @Service等注解都由spring父容器来扫描，但是不能和子容器重复扫描Controller，否则事务使用会出问题 -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 读取properties配置文件 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
+    <!-- 配置dbcp数据源，带连接池，指定应用停止后数据源销毁方法，数据源对象为单例 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="root"/>
+        <property name="password" value="${password}"/>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="3"/>
+        <property name="maxActive" value="20"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+    </bean>
+    <!-- 使用数据源配置事务管理，使用的时候使用注解@Transactional或AOP方式 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 这里指定类别名后，mybatis-config.xml中就不需要再指定了 -->
+        <property name="typeAliasesPackage" value="com.hsgene"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+    </bean>
+    <!-- 三种操作是数据库方式：SqlSessionTemplate、MapperFactoryBean、MapperScannerConfigurer -->
+    <!-- 使用SqlSessionTemplate方式操作数据库，其就是实现的SqlSession接口 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <!-- 此种方式使用mapperInterface属性代替SqlSessionFactoryBean中的mapperLocations属性 -->
+    <!-- 该对象就是Dao的实现类，将其注入到Service类中使用，所以每个Dao都需要配置一个MapperFactoryBean，比较麻烦 -->
+    <bean id="employeeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="com.hsgene.dao.EmployeeDao"/>
+    </bean>
+    <!-- MapperFactoryBean方式必须在xml中给service注入属性 -->
+    <bean id="employeeService" class="com.hsgene.service.EmployeeService">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
 
-       <!-- 扫描basePackage下的Mapper接口,如果com.hsgene.dao包下并不完全是我们定义的Mapper接口，我们也可以通过自定义注解的方式指定生成MapperFactoryBean对象 -->
-       <!-- 此种方法也是基于MapperFactoryBean方法 -->
-       <!--<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-              <property name="basePackage" value="com.hsgene.dao" />
-              <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-       </bean>-->
+    <!-- 扫描basePackage下的Mapper接口,如果com.hsgene.dao包下并不完全是我们定义的Mapper接口，我们也可以通过自定义注解的方式指定生成MapperFactoryBean对象 -->
+    <!-- 此种方法也是基于MapperFactoryBean方法 -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hsgene.dao"/>
+        <!-- 当只有一个数据源时，sqlSessionFactoryBeanName属性是可以不手动注入的，MapperScannerConfigurer会自动autowired一个sqlSessionFactory，
+         当有多个数据源时，即有多个sqlSessionFactory时，就要指定一个用于sqlSessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
 
 </beans>

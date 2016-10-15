@@ -22,7 +22,7 @@ public class JunitTest {
     private EmployeeService employeeService;
 
     @Before
-    public void setup(){
+    public void setup() {
         //  获取spring容器上下文
         applicationContext = new ClassPathXmlApplicationContext("spring-context.xml");
         //  SqlSessionTemplate存在于spring中，而spring中的SqlSessionTemplate已被注入了相应的属性，
@@ -33,13 +33,13 @@ public class JunitTest {
     }
 
     @Test
-    public void testFindList(){
+    public void testFindList() {
         List<Employee> list = sqlSessionTemplate.selectList("com.hsgene.dao.EmployeeDao.findList");
-        list.forEach(x-> System.out.println(x.getName()));
+        list.forEach(x -> System.out.println(x.getName()));
     }
 
     @Test
-    public void testGetById(){
+    public void testGetById() {
         Employee employee = employeeService.getById(String.valueOf(1000));
         System.out.println(employee.getName());
     }
