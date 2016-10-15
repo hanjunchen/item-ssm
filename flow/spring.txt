@@ -1,5 +1,15 @@
-mybatis交给spring管理
+mybatis交给spring管理：
 spring容器即spring上下文就是一个大的类，所有的配置在其中的类都是作为它的的属性，
 通过spring管理就是为这些属性实例化初始化，开发使用时只需要提供spring上下文即可获得其中的任意属性，
 在项目启动时spring配置文件中的对象有些会直接被实例化，作为单例使用，
 交给spring管理后所有bean的实例化都可以由spring提供的注解或api来完成
+
+
+spring注解
+类注解表示将bean的实例化工作交给spring
+属性注解表示将该属性注入到spring中的当前bean
+也就是说：当通过ApplicationContext实例化一个@Controller标注的对象时---而真正的web项目中，这个过程是由spring自动获取的
+其中@Autowired注解的属性都已经注入进来并且被实例化，依次直到DAO层都是自动装配和注入
+所以实际项目中基本不需要使用ApplicationContext对象
+使用一个类其实需要两步：将其加入spring容器、通过spring再将其注入给某个bean的属性
+注解可以装配类也可以注入属性、bean标签可以同时进行装配和注入（如果是通过property注入则必须有setter/getter方法）

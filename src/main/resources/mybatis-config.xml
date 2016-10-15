@@ -5,8 +5,12 @@
 <configuration>
 
     <settings>
-        <!-- 设置日志类，提供支持控台打印sql语句 -->
-        <setting name="logImpl" value="LOG4J"/>
+        <!-- 设置日志类 -->
+        <!--<setting name="logImpl" value="LOG4J"/>-->
+        <!-- 全局性地启用或禁用所有在mapper配置文件中配置的缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 全局性地启用或禁用延迟加载,默认值为true，关闭懒加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
     <typeAliases>
         <!--<typeAlias type="com.hsgene.entity.User" alias="User" />-->
@@ -15,4 +19,5 @@
     </typeAliases>
 
     <!-- 剩余的配置都交给spring管理 -->
+
 </configuration>
