@@ -15,14 +15,14 @@
         <!-- @Service等注解都由spring父容器来扫描，但是不能和子容器重复扫描Controller，否则事务使用会出问题 -->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-    <!-- 读取properties配置文件 -->
-    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 读取properties配置文件，注意这里要设置system-properties-mode属性为FALLBACK，其默认为ENVIRONMENT，会先读取系统配置文件，再读取location指定的配置文件，而username属性系统文件中也有所以会先读取系统用户名 -->
+    <context:property-placeholder location="classpath:db.properties" system-properties-mode="FALLBACK"/>
     <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
     <!-- 配置dbcp数据源，带连接池，指定应用停止后数据源销毁方法，数据源对象为单例 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
         <property name="driverClassName" value="${driver}"/>
         <property name="url" value="${url}"/>
-        <property name="username" value="root"/>
+        <property name="username" value="${username}"/>
         <property name="password" value="${password}"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
