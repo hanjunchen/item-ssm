@@ -34,4 +34,4 @@
 10、创建数据库
 11、pom导入依赖
 12、添加配置文件mybatis-config.xml、spring-context.xml、spring-mvc.xml、db.properties、log4j.properties、web.xml
-13、添加实体类、dao、mapper.xml
+13、添加实体类、dao、mappers.xml

@@ -47,7 +47,7 @@
         <!-- 这里指定类别名后，mybatis-config.xml中就不需要再指定了 -->
         <property name="typeAliasesPackage" value="com.hsgene"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
     </bean>
     <!-- 三种操作是数据库方式：SqlSessionTemplate、MapperFactoryBean、MapperScannerConfigurer -->
     <!-- 使用SqlSessionTemplate方式操作数据库，其就是实现的SqlSession接口 -->
@@ -57,7 +57,7 @@
     <!-- 此种方式使用mapperInterface属性代替SqlSessionFactoryBean中的mapperLocations属性 -->
     <!-- 该对象就是Dao的实现类，将其注入到Service类中使用，所以每个Dao都需要配置一个MapperFactoryBean，比较麻烦 -->
     <!-- 而且需要极为注意的是此种方法要求mapper.xml文件必须和mapper接口在同一个目录下，且除了后缀名名称必须一致，否则两者无法映射匹配 -->
-    <!--<bean id="employeeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <!--<bean id="employeeDao" class="org.mybatis.spring.mappers.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <property name="mapperInterface" value="com.hsgene.dao.EmployeeDao"/>
     </bean>-->
