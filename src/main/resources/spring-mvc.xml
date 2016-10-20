@@ -31,7 +31,8 @@
 
     <!-- 第二种映射静态资源文件方法，/statics/下的请求映射到/statics/**所有的文件包括子文件（*不包含子文件，**包含子文件） -->
     <!-- 二选一，该种方法可以映射指定目录下的静态资源，并且还可以指定缓存静态资源时间，31536000是1年 -->
-    <mvc:resources mapping="/statics/**" location="classpath:statics" cache-period="31536000"/>
+    <!-- 该种方式覆盖上面的方式，需要注意这里的location的值必须是这种形式：/statics/ -->
+    <mvc:resources mapping="/statics/**" location="classpath:/statics/" cache-period="31536000"/>
 
     <!-- 配置处理全局异常类，需要关闭局部异常注解@HandlerException，否则局部异常优先 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
