@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
     <!-- properties属性用于集中管理依赖jar包版本 -->
     <properties>
-        <mysql.driver.version>5.1.30</mysql.driver.version>
+                <mysql.driver.version>5.1.30</mysql.driver.version>
         <log4j.version>1.2.17</log4j.version>
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
@@ -202,6 +202,13 @@
             <version>1.16.8</version>
             <!-- 定义依赖作用范围，provided会导致编译后项目结构classes中没有lib的依赖 -->
             <!--<scope>provided</scope>-->
+        </dependency>
+        <!-- 七牛云存储依赖 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <!-- 表示一个版本号区间 -->
+            <version>[7.0.0, 7.0.99]</version>
         </dependency>
     </dependencies>
     <build>
