@@ -6,8 +6,11 @@
     <script src="/statics/js/angular.js"></script>
     <script>
         var app = angular.module('myApp', []);
-        app.controller('myCtrl', function ($scope) {
+        app.controller('myCtrl', function ($scope,$http) {
+            var ak,sk;
+            $http.get(ak,sk).then(function (data) {
 
+            });
         });
     </script>
 </head>
