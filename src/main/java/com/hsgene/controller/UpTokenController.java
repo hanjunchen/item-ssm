@@ -18,6 +18,6 @@ public class UpTokenController {
     @ResponseBody
     public String makeUpToken() {
         Auth auth = Auth.create(Constant.ACCESS_KEY, Constant.SECRET_KEY);
-        return auth.uploadToken(Constant.BUCKET_NAME, null, 3600 * 3600l, null);
+        return auth.uploadToken(Constant.BUCKET_NAME, null, 3600l, null);
     }
 }
