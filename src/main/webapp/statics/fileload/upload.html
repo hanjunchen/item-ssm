@@ -7,25 +7,28 @@
     <script>
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function ($scope,$http) {
-            var ak,sk;
-            $http.get(ak,sk).then(function (data) {
-
+            var vm = $scope;
+            var url = 'http://localhost:81/uptoken';
+            $http.get(url).then(function (res) {
+                vm.token = res.data;
+                vm.fileName = 'myFile';
+                console.log(vm.token);
             });
         });
     </script>
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-<form action="http://ofdy8083a.bkt.clouddn.com/" method="post" enctype="multipart/form-data">
+<form name="myForm" action="http://ofdy8083a.bkt.clouddn.com" method="post" enctype="multipart/form-data">
     <!-- 上传文件名 -->
-    <input name="key" type="hidden" value="myFile">
+    <input name="key" type="hidden" ng-model="fileName">
     <!-- 指定请求响应的回调内容 -->
     <!--<input name="x:<custom_name>" type="hidden" value="<custom_value>">-->
     <!-- 上传凭证 -->
-    <input name="token" type="hidden">
+    <input name="token" type="hidden" ng-model="token">
     <!-- 上传文件 -->
     <input name="file" type="file">
     <!-- 上传内容的CRC32校验码 -->
-    <input name="crc32" type="hidden">
+    <!--<input name="crc32" type="hidden">-->
     <!-- 指定HTTP请求返回头部信息 -->
     <input name="accept" type="hidden">
     <input type="submit" value="上传">
