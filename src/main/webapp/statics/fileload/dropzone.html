@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>dropzonejs</title>
+    <link rel="stylesheet" href="/statics/css/index.css">
+    <link rel="stylesheet" href="/statics/css/bootstrap.css">
+    <link rel="stylesheet" href="/statics/css/dropzone.css">
+    <script src="/statics/js/jquery.js"></script>
+    <script src="/statics/js/bootstrap.js"></script>
+    <script src="/statics/js/dropzone.js"></script>
+    <script src="/statics/js/angular.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="dropzoneCtrl">
+<div class="ibox-content">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="dropzone-form">
+                <form action="" class="dropzone" dropzone="" id="dropzone" name="dropzone" method="post" enctype="multipart/form-data">
+                    <input name="key" type="hidden" value="{{fileName}}">
+                    <input name="token" type="hidden" value="{{token}}">
+                    <div class="dz-default dz-message">
+                        <h4>拖拽文件到这里 …</h4>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" ng-click="uploadFile()">上传</button>
+            <button class="btn btn-info" ng-click="reset()">重置</button>
+        </div>
+    </div>
+</div>
+<script src="/statics/myjs/dropzone.controller.js"></script>
+<script src="/statics/myjs/directive.js"></script>
+<script type="text/javascript">
+    Dropzone.autoDiscover = false;
+</script>
+</body>
+</html>
