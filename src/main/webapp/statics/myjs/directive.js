@@ -11,7 +11,7 @@ function dropzone() {
                 maxThumbnailFilesize: 10,
                 parallelUploads: 15,
                 autoProcessQueue: false,
-                uploadMultiple: true,
+                uploadMultiple: false,
                 addRemoveLinks: true,
                 maxFiles: scope.maxFilesize == undefined ? 15 : scope.maxFilesize,
                 dictRemoveFile: "移除文件",
@@ -22,14 +22,9 @@ function dropzone() {
             };
             var eventHandlers = {
                 'success': function (file, response) {
-                    if (response.success) {
-                        scope.key = response.key;
-                        scope.$apply();
-                    } else {
-                        scope.error = response.message;
-                    }
+                    scope.key = response.key;
+                    scope.$apply();
                 }
-
             };
 
             dropzone = new Dropzone(element[0], config);

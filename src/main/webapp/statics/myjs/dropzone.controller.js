@@ -15,14 +15,15 @@ function dropzoneCtrl($scope, $http, $filter) {
         vm.fileName = 'gene1' + timeStamp + ext;
         var url = 'http://localhost:81/uptoken?key=' + vm.fileName;
         $http.get(url).then(function (res) {
-            vm.token = res.data;
-            vm.$apply();    //  异步请求相当于定时任务，需要手动digest
+            //vm.token = res.data;
+            //vm.$apply();    //  异步请求相当于定时任务，需要手动digest才能更新到view和其他相连的作用域，这里直接用jq
+            $('#token').val(res.data);
             vm.processDropzone();
         });
     };
 
     vm.$watch('key', function (newValue, oldValue) {
-        if (newValue != undefined && newValue == vm.fileName) {
+        if (newValue != undefined && newValue != oldValue) {
             console.log(newValue, oldValue, '上传成功');
         }
     });
