@@ -5,7 +5,6 @@ function dropzoneCtrl($scope, $http, $filter) {
     vm.url = 'http://upload.qiniu.com/';
     vm.imagePrefix = 'http://ofdy8083a.bkt.clouddn.com/';
     vm.dropzone = {};
-    vm.fileType = ".pdf";
     vm.maxFilesize = 1;
 
     vm.uploadFile = function () {

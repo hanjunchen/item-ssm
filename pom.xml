@@ -225,6 +225,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.7.v20160115</version>
                 <configuration>
+                    <!-- 1秒进行一次热部署，但是仍需要手动ctrl+F9编译一下，故使用tomcat替代jetty -->
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
                     <httpConnector>
                         <port>81</port>
                     </httpConnector>
