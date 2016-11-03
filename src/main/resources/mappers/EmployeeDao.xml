@@ -17,7 +17,7 @@
         select * from employee e where id = #{id}
     </select>
 
-    <!-- 加上useGeneratedKeys="true"和keyProperty="id"属性，insert语句执行后会将自增长的id赋给传入的对象 -->
+    <!-- 加上useGeneratedKeys="true"和keyProperty="id"属性，insert语句执行后会将自增长的id覆盖赋给传入的对象 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO employee(
         name,
