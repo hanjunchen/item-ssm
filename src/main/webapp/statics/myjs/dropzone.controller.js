@@ -16,6 +16,7 @@ function dropzoneCtrl($scope, $http, $filter) {
         $http.get(url).then(function (res) {
             //vm.token = res.data;
             //vm.$apply();    //  异步请求相当于定时任务，需要手动digest才能更新到view和其他相连的作用域，这里直接用jq
+            //ajax请求中也可以设置async参数为false，关闭异步，同步请求；而angular中则需要用$q服务和promise对象来实现同步
             $('#token').val(res.data);
             vm.processDropzone();
         });
