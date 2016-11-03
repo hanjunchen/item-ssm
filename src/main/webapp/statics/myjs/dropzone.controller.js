@@ -23,7 +23,7 @@ function dropzoneCtrl($scope, $http, $filter) {
 
     vm.$watch('key', function (newValue, oldValue) {
         if (newValue != undefined && newValue != oldValue) {
-            console.log(newValue, oldValue, '上传成功');
+            console.log(newValue, '上传成功');
         }
     });
 
