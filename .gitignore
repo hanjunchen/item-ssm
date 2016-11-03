@@ -5,6 +5,8 @@
 .rar
 .idea
 *.iml
+.log
 /target/*
 /src/main/webapp/WEB-INF/classes/*
+bower_components/
 /target/
