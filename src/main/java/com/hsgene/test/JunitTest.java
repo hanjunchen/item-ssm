@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,4 +44,12 @@ public class JunitTest {
         Employee employee = employeeService.getById(String.valueOf(1000));
         System.out.println(employee.getName());
     }
+
+    @Test
+    public void insert(){
+        Employee employee = new Employee("小小", 1, "进货员", 3, "123456789012345678", 10, new Date());
+        employeeService.insert(employee);
+        System.out.println(employee.getId());
+    }
+
 }

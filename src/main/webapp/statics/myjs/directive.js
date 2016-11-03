@@ -20,18 +20,15 @@ function dropzone() {
                 dictInvalidFileType: '不支持当前文件类型',
                 dictMaxFilesExceeded: '不支持多文件上传'
             };
-            var eventHandlers = {
-                'success': function (file, response) {
-                    scope.key = response.key;
-                    scope.$apply();
-                }
-            };
 
             dropzone = new Dropzone(element[0], config);
 
-            angular.forEach(eventHandlers, function (handler, event) {
-                dropzone.on(event, handler);
+            dropzone.on('success', function (file, response) {
+                scope.key = response.key;
+                scope.$apply();
             });
+
+            scope.dropzone = dropzone;
 
             scope.processDropzone = function () {
                 scope.dropzone.processQueue();
@@ -40,7 +37,6 @@ function dropzone() {
             scope.resetDropzone = function () {
                 scope.dropzone.removeAllFiles();
             }
-            scope.dropzone = dropzone;
         }
     };
 }
