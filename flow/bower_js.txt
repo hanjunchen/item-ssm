@@ -12,7 +12,7 @@ bower install xxx --save 安装依赖的同时将依赖添加到bower.json文件
 bower info jquery 查看依赖的版本信息
 bower lookup jquery 查看依赖可用名称
 bower search jquery 查看依赖可用包
-bower update 更新包
+bower update 更新包，实际上用bower install更新更快(修改bower.json文件后)
 bower uninstall jquery 卸载包
 bower install 移植项目时，只要bower.json中有相关依赖，该命令会加载所有依赖
 
