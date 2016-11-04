@@ -15,6 +15,8 @@ spring注解
 所以bean标签的优势就是可以不修改源文件的情况下进行装配注入---对于引用的外部包很有用，然后再配合ApplicationContext来使用外部接口，
 这是注解方式不能代替的
 注入的依赖只能是spring中已经装配的bean
+类注解是将bean装配到spring中
+属性注解是给当前类注入该依赖
 
 要想注入接口必须使用MapperScannerConfigurer来扫描接口（这样就是注入的接口实现类xml文件）
 

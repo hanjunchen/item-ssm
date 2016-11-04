@@ -73,6 +73,7 @@
         <!-- 当只有一个数据源时，sqlSessionFactoryBeanName属性是可以不手动注入的，MapperScannerConfigurer会自动autowired一个sqlSessionFactory，
          当有多个数据源时，即有多个sqlSessionFactory时，就要指定一个用于sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--<property name="annotationClass" value="com.hsgene.common.MyBatisDao"/>-->
     </bean>
 
 </beans>

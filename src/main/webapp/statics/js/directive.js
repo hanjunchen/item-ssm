@@ -3,7 +3,6 @@ function dropzone() {
     return {
         restrict: 'C',
         link: function (scope, element, attrs) {
-
             var config = {
                 url: scope.url,
                 maxFilesize: 5,
@@ -21,6 +20,7 @@ function dropzone() {
                 dictMaxFilesExceeded: '最多只能上传' + scope.maxFilesize + '张'
             };
 
+            //  element[0]是指令所在标签的DOM对象（这里是一个form表单），当一个页面上有多个dropzone时，那会产生多个dropzone对象
             var dropzone = new Dropzone(element[0], config);
 
             dropzone.on('success', function (file, response) {
@@ -28,15 +28,15 @@ function dropzone() {
                 scope.$apply();
             });
 
-            scope.dropzone = dropzone;
-
             scope.processDropzone = function () {
-                scope.dropzone.processQueue();
+                dropzone.processQueue();
             };
 
             scope.resetDropzone = function () {
-                scope.dropzone.removeAllFiles();
+                dropzone.removeAllFiles();
             }
+
+            scope.dropzone = dropzone;
         }
     };
 }
