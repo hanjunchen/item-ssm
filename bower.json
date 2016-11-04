@@ -1,0 +1,27 @@
+{
+  "name": "item-ssm",
+  "homepage": "https://github.com/hanjunchen/item-ssm",
+  "authors": [
+    "韩俊辰 <812878994@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular": "^1.5.8",
+    "dropzone": "^4.3.0",
+    "bootstrap": "^3.3.7",
+    "qiniu": "^1.0.17",
+    "plupload": "^2.1.1"
+  },
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/bower_components",
+    "test",
+    "tests"
+  ]
+}

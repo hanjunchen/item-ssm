@@ -1,0 +1,18 @@
+使用bower添加依赖步骤：
+1、安装node.js
+2、安装git
+3、使用npm install bower -g 来安装bower
+4、bower的根目录是bower_compoenets，在.gitignore中添加bower_compoenets/
+5、手动创建.bowerrc文件，指定bower_compoenets的路径，使用相对路径，这里是指编译前的目录
+6、如果没有添加.bowerrc文件需要进入指定目录使用bower install xxx 来安装js依赖
+
+bower常用命令：
+bower init 初始化bower.json文件---新建项目必需
+bower install xxx --save 安装依赖的同时将依赖添加到bower.json文件中
+bower info jquery 查看依赖的版本信息
+bower lookup jquery 查看依赖可用名称
+bower search jquery 查看依赖可用包
+bower update 更新包
+bower uninstall jquery 卸载包
+bower install 移植项目时，只要bower.json中有相关依赖，该命令会加载所有依赖
+
