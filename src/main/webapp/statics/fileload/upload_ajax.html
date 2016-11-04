@@ -13,18 +13,11 @@
                 var ext = path.substring(path.lastIndexOf('.'), path.length);
                 var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');// angular格式化日期过滤器$filter，相当于界面中使用 | 过滤
                 var fileName = 'gene' + timeStamp + ext;
-                var url = 'http://localhost:8080/uptoken';
-                $http({
-                    method:'get',
-                    url:url,
-                    params:{key:fileName}
-                }).then(function(res){
-                    console.log(res);
+                var url = 'http://localhost:8080/uptoken?key=' + fileName;
+                $http.get(url).then(function (res) {
+                    vm.token = res.data;
+                    console.log(vm.token);
                 });
-                /*$http.get(url).then(function (res) {
-                    *//*vm.token = res.data;
-                    console.log(vm.token);*//*
-                });*/
             }
             //  js中两种上传文件方式：XMLHttpRequest和ajax，可以获得返回值，都是基于FormData对象
             //  XMLHttpRequest方式
