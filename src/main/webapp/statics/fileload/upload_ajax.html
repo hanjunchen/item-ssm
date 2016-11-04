@@ -9,15 +9,14 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function ($scope, $http, $filter) {
             var vm = $scope;
-            vm.ext = '';
             vm.fileChange = function (path) {
                 var ext = path.substring(path.lastIndexOf('.'), path.length);
                 var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');// angular格式化日期过滤器$filter，相当于界面中使用 | 过滤
-                vm.fileName = 'gene' + timeStamp + ext;
-                var url = 'http://localhost:8080/uptoken?key=' + vm.fileName;
+                var fileName = 'gene' + timeStamp + ext;
+                var url = 'http://localhost:8080/uptoken?key=' + fileName;
                 $http.get(url).then(function (res) {
-                    vm.token = res.data;
-                    console.log(vm.token);
+                    /*vm.token = res.data;
+                    console.log(vm.token);*/
                 });
             }
             //  js中两种上传文件方式：XMLHttpRequest和ajax，可以获得返回值，都是基于FormData对象
@@ -43,7 +42,7 @@
                     url: 'http://upload.qiniu.com/',
                     type: 'POST',
                     data: formData,
-                    async: false,
+                    async: false,       // 同步，取消异步
                     cache: false,
                     contentType: false, // 告诉jQuery不要去设置Content-Type请求头
                     processData: false, // 告诉jQuery不要去处理发送的数据

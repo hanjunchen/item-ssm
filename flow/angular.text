@@ -1,0 +1,2 @@
+自定义指令：封装当前DOM的一串操作，相当于从controller中单独拿出来，所以自定义指令中的操作可以全部放进controller中
+angular执行时会先加载指令在加载controller

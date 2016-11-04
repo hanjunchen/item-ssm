@@ -18,10 +18,10 @@ function dropzone() {
                 acceptedFiles: scope.fileType == undefined ? ".jpg,.jpeg,.png,.doc.docx,.xls,.xlsx,.pdf" : scope.fileType,
                 dictDefaultMessage: "拖动或者点击选择文件",
                 dictInvalidFileType: '不支持当前文件类型',
-                dictMaxFilesExceeded: '不支持多文件上传'
+                dictMaxFilesExceeded: '最多只能上传' + scope.maxFilesize + '张'
             };
 
-            dropzone = new Dropzone(element[0], config);
+            var dropzone = new Dropzone(element[0], config);
 
             dropzone.on('success', function (file, response) {
                 scope.key = response.key;
