@@ -14,7 +14,7 @@
                 var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');// angular格式化日期过滤器$filter，相当于界面中使用 | 过滤
                 vm.fileName = 'gene' + timeStamp + ext;
                 var fileName = vm.fileName;
-//                $('#key').val(fileName);
+                $('#key').val(fileName);
                 var url = 'http://localhost:8080/uptoken?key=' + fileName;
                 $.get(url,function(data){
                     vm.token = data;
