@@ -8,6 +8,7 @@ function dropzoneCtrl($scope, $http, $filter) {
     vm.maxFilesize = 1;
 
     vm.uploadFile = function () {
+        console.log(vm);
         var name = vm.dropzone.files[0].name;
         var ext = name.substring(name.lastIndexOf('.'), name.length);
         var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');
