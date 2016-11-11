@@ -1,21 +1,19 @@
 package com.hsgene.common;
 
-import com.hsgene.entity.Employee;
-
 import java.util.List;
 
 /**
  * Created by hjc on 2016/10/15.
  */
-public abstract class BaseService {
+public abstract class BaseService<T> {
 
-    protected abstract List<Employee> findList(Employee employee);
+    protected abstract List<T> findList(T t);
 
-    protected abstract Employee getById(String id);
+    protected abstract T getById(String id);
 
-    protected abstract int insert(Employee employee);
+    protected abstract int insert(T t);
 
-    protected abstract int update(Employee employee);
+    protected abstract int update(T t);
 
-    protected abstract int delete(Employee employee);
+    protected abstract int delete(T t);
 }

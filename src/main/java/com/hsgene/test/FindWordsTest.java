@@ -12,7 +12,7 @@ import org.junit.Test;
 public class FindWordsTest {
 
     @Test
-    public void searchWordsTest(){
+    public void testSearchWords(){
         KWSeeker kw1 = KWSeeker.getInstance(new Keyword("test1"), new Keyword("test2"));
         // 添加一个词
         kw1.addWord(new Keyword("test3"));

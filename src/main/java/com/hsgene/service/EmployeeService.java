@@ -12,7 +12,7 @@ import java.util.List;
  * Created by hjc on 2016/10/15.
  */
 @Service
-public class EmployeeService extends BaseService {
+public class EmployeeService extends BaseService<Employee> {
 
     // idea自动开启autowiring功能，会和注解注入重复，在setting中关闭；或者自定义一个注解加到dao上面，在MapperScannerConfigurer上引用
     @Resource
