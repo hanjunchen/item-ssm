@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Created by hjc on 2016/11/9.
  */
-public class FindWordsTest {
+public class SearchWordsTest {
 
     @Test
     public void testSearchWords(){

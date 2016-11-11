@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by hjc on 2016/10/15.
  */
-public class JunitTest {
+public class SpringTest {
 
     private SqlSessionTemplate sqlSessionTemplate;
 
