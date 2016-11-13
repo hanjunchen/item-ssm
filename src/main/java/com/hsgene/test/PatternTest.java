@@ -11,6 +11,18 @@ import java.util.regex.Pattern;
  */
 public class PatternTest {
 
+    @Test
+    public void testDate() {
+        //  匹配 2015-09-11 格式的日期，注意匹配到空白字符后得到的group()是不包含空白字符的
+        String regex = "入院日期.\\d{4}-((0[1-9])|(1[012]))-((0[1-9])|([12]\\d)|(3[01]))(\\b|\\s)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher("入院日期：2015-10-13  ");
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            System.out.println(matcher.group().length());
+        }
+    }
+
     //  StringBuilder、StringBuffer、Pattern检索效率比较，性能依次递减，其中正则的效率很低
     @Test
     public void testPattern() throws IOException {

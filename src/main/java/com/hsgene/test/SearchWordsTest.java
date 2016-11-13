@@ -1,3 +1,4 @@
+/*
 package com.hsgene.test;
 
 import com.tfc.analysis.KWSeeker;
@@ -6,9 +7,11 @@ import com.tfc.analysis.fragment.HTMLFragment;
 import com.tfc.analysis.process.WordFinder;
 import org.junit.Test;
 
+*/
 /**
  * Created by hjc on 2016/11/9.
- */
+ *//*
+
 public class SearchWordsTest {
 
     @Test
@@ -26,3 +29,4 @@ public class SearchWordsTest {
         kw1.process(new WordFinder(), "这是test1,要注意哦！", null);
     }
 }
+*/
