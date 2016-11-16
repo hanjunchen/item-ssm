@@ -3,28 +3,19 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>七牛 文件直传</title>
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
     <script>
         var app = angular.module('myApp', []);
-        app.controller('myCtrl', function ($scope, $http, $filter) {
+        app.controller('myCtrl', function ($scope, $http, $filter, CommonService) {
             var vm = $scope;
             vm.fileChange = function (path) {
                 var ext = path.substring(path.lastIndexOf('.'), path.length);
                 var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');// angular格式化日期过滤器$filter，相当于界面中使用 | 过滤
                 vm.fileName = 'gene' + timeStamp + ext;
-                var fileName = vm.fileName;
-                $('#key').val(fileName);
-                var url = 'http://localhost:8080/uptoken?key=' + fileName;
-                $.get(url,function(data){
-                    vm.token = data;
-                    $('#token').val(data);
-                    console.log(data);
+                CommonService.getUpToken(vm.fileName).then(function (res) {
+                    console.log(res);
                 });
-                /*$http.get(url).then(function (res) {
-                    vm.token = res.data;
-                    console.log(vm.token);
-                });*/
             }
             //  js中两种上传文件方式：XMLHttpRequest和ajax，可以获得返回值，都是基于FormData对象
             //  XMLHttpRequest方式
@@ -81,11 +72,11 @@
 <!-- 直传需要使用七牛提供的接口url：http://upload.qiniu.com/，token中封装了上传空间地址和访问资源名，以及权限标识 -->
 <form id="myForm" name="myForm" action="http://upload.qiniu.com/" method="post" enctype="multipart/form-data">
     <!-- 上传文件名，后台生成token时需要 -->
-    <input id="key" name="key" type="hidden" value="{{fileName}}">{{fileName}}
+    <input id="key" name="key" type="hidden" value="{{fileName}}">
     <!-- 指定请求响应的回调内容 -->
     <!--<input name="x:<custom_name>" type="hidden" value="<custom_value>">-->
     <!-- 上传凭证 -->
-    <input id="token" name="token" type="hidden" value="{{token}}">{{token}}
+    <input id="token" name="token" type="hidden" value="{{token}}">
     <!-- 上传文件 -->
     <input name="file" type="file" onchange="angular.element(this).scope().fileChange(this.value)">
     <!-- 上传内容的CRC32校验码 -->
@@ -96,4 +87,6 @@
     <input type="button" value="上传" ng-click="uploadFile()">
 </form>
 </body>
+<!-- 需要定义在app之后 -->
+<script src="../js/common.service.js"></script>
 </html>

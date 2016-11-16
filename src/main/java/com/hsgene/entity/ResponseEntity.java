@@ -1,6 +1,8 @@
 package com.hsgene.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -10,13 +12,11 @@ import org.springframework.http.HttpStatus;
  */
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseEntity {
 
     private JSONObject jsonObject;
     private HttpStatus httpStatus;
 
-    public ResponseEntity(JSONObject jsonObject, HttpStatus httpStatus) {
-        this.jsonObject = jsonObject;
-        this.httpStatus = httpStatus;
-    }
 }

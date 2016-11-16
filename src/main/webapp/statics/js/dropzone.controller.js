@@ -1,4 +1,5 @@
-angular.module('myApp', []).controller('dropzoneCtrl', dropzoneCtrl);
+var app = angular.module('myApp', []);
+app.controller('dropzoneCtrl', dropzoneCtrl);
 
 function dropzoneCtrl($scope, $http, $filter) {
     var vm = $scope;
