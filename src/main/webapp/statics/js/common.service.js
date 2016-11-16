@@ -1,9 +1,9 @@
 app.factory('CommonService', function ($http) {
     var service = {};
-    service.getUpToken = function (key) {
+    service.getUpToken = function (url, key) {
         return $http({
             method: 'GET',
-            url: 'http://localhost:8080/uptoken2',
+            url: url,
             params: {key: key}
         }).then(handleOrSuccess, handleError('获取token失败'));
     }
