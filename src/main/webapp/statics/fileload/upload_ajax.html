@@ -23,8 +23,8 @@
                 var timeStamp = $filter('date')(new Date(), 'MM-dd-HH-mm-ss');// angular格式化日期过滤器$filter，相当于界面中使用 | 过滤
                 var url = 'http://localhost:8080/uptoken2';
                 vm.fileName = 'gene' + timeStamp + ext;
-                CommonService.getUpToken(url).then(function (res) {
-                    console.log(res);
+                CommonService.getUpToken(url).then(function (data) {
+                    vm.token = data;
                 });
             }
             //  js中两种上传文件方式：XMLHttpRequest和ajax，可以获得返回值，都是基于FormData对象
@@ -36,8 +36,6 @@
                 xhr.onload = function (event) {
                     if (xhr.status == 200) {
                         console.log('上传成功', xhr.response);
-                    } else {
-
                     }
                 };
                 xhr.upload.addEventListener("progress", progressFunction, false);
