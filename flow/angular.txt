@@ -10,3 +10,9 @@
 
 路由：
 路由配置在config方法中，$http服务的一些请求头也配置在其中
+
+$q服务使用步骤：
+    1、var deffer = $q.deffer()初始化
+    2、deffer.resolve()接收当前承诺/deffer.reject()拒绝当前承诺-----在then、success、error方法中调用，用于接收拒绝承诺
+    3、return deffer.promise返回当前承诺对象
+    这样便可以实现ajax请求的同步，让下一个操作在返回的promise中进行，从传统的在多层嵌套then方法中处理解放出来
