@@ -1,9 +1,12 @@
 自定义指令：
-封装当前DOM的一串操作，相当于从controller中单独拿出来，所以自定义指令中的操作可以全部放进controller中
-一个自定义指令中可以绑定多个值，相当于可以拥有多个ng-model，指令中的操作就是获取值给这些model绑定值
-link和controller参数的使用场景：
-link参数方法有三个参数scope、element、attrs来自于指令入口，意为与指令建立连接从而交互数据，包含了指令的一些必需操作，
-这个scope与指令所在页面是同一个作用域对象，一般用于完成一些初始化的工作
-controller用于当整个指令页面和其控制器中的数据都可以通用时，把控制器和页面全部封装成指令，controller会配合templateUrl参数使用,
-而且controller参数方法也可以注入$element等参数用于获取指令标签的属性，但是传入的$scope是指令所在页面的子作用域
-由此，link使用和父页面同一个scope，controller使用了一个子scope
+    1、封装当前DOM的一串操作，相当于从controller中单独拿出来，所以自定义指令中的操作可以全部放进controller中
+    2、一个自定义指令中可以绑定多个值，相当于可以拥有多个ng-model，指令中的操作就是获取值给这些model绑定值
+       link和controller参数的使用场景：
+    1、link参数方法有三个参数scope、element、attrs来自于指令入口，意为与指令建立连接从而交互数据，包含了指令的一些必需操作，
+       这个scope与指令所在页面是同一个作用域对象，一般用于完成一些初始化的工作
+    2、controller用于当整个指令页面和其控制器中的数据都可以通用时，把控制器和页面全部封装成指令，controller会配合templateUrl参数使用,
+       而且controller参数方法也可以注入$element等参数用于获取指令标签的属性，但是传入的$scope是指令所在页面的子作用域
+       由此，link使用和父页面同一个scope，controller使用了一个子scope
+
+路由：
+路由配置在config方法中，$http服务的一些请求头也配置在其中
