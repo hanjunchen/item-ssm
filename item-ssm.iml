@@ -78,5 +78,6 @@
     <orderEntry type="library" name="Maven: com.squareup.okhttp:okhttp:2.7.1" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: com.belerweb:pinyin4j:2.5.1" level="project" />
+    <orderEntry type="library" name="jquery" level="project" />
   </component>
 </module>
