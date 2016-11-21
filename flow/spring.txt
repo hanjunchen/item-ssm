@@ -22,3 +22,9 @@ spring注解
 
 spring和springMVC父子容器关系
 web.xml是最大的容器
+
+过滤器：过滤的是请求
+spring AOP：可以直接切入除controller之外的任意类的方法上,而controller里面无法直接切入，需要切入
+execution(* org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(..))
+因为controller注解的类，都被org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter给代理了
+springMVC拦截器:用于拦截controller中的方法
