@@ -12,6 +12,15 @@ import java.util.regex.Pattern;
 public class PatternTest {
 
     @Test
+    public void testString(){
+        Pattern pattern = Pattern.compile("【[^【^】]*】");
+        Matcher matcher = pattern.matcher("aaa【1请问e】45");
+        while (matcher.find()){
+            System.out.println(matcher.group());
+        }
+    }
+
+    @Test
     public void testDate() {
         //  匹配 2015-09-11 格式的日期，注意匹配到空白字符后得到的group()是不包含空白字符的
         String regex = "入院时间.\\s*\\d{4}(-|年)((0?[1-9])|(1[012]))(-|月)((0?[1-9])|([12]\\d)|(3[01]))日?((([01]\\d)|(2[0-3])):\\w{2})?(\\s|$)";
