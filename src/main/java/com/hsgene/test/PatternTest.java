@@ -18,8 +18,8 @@ public class PatternTest {
         while (matcher.find()){
             System.out.println(matcher.group());
         }
-        Pattern pattern2 = Pattern.compile("patient_[^b]*");
-        Matcher matcher2 = pattern2.matcher("patient_diseaseItemDetail");
+        Pattern pattern2 = Pattern.compile("patient_[^b]+");
+        Matcher matcher2 = pattern2.matcher("patient_basic");
         while (matcher2.find()){
             System.out.println(matcher2.group());
         }
