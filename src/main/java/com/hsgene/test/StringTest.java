@@ -11,4 +11,9 @@ public class StringTest {
     public void testSubString() {
         System.out.println(new StringBuilder("qwe").substring(1, 2));   //  第二个参数不能超过最大索引，否则越界异常
     }
+
+    @Test
+    public void testIndexOf(){
+        System.out.println("\"qwe123\"".indexOf("\"", 1));
+    }
 }

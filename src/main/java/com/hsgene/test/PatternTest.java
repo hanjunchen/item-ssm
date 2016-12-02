@@ -13,8 +13,8 @@ public class PatternTest {
 
     @Test
     public void testString(){
-        Pattern pattern = Pattern.compile("【[^【^】]*】");
-        Matcher matcher = pattern.matcher("aaa【1请问e】45");
+        Pattern pattern = Pattern.compile("\"[a-zA-Z]+\":\"[^\"]*分子检测");
+        Matcher matcher = pattern.matcher("{\"summary\":\"【附件】\",\"moleIns\":\"【分子检测】\",\"chrt\":\"【化疗】\",");
         while (matcher.find()){
             System.out.println(matcher.group());
         }
