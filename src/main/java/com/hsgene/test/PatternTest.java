@@ -18,6 +18,16 @@ public class PatternTest {
         while (matcher.find()){
             System.out.println(matcher.group());
         }
+        Pattern pattern2 = Pattern.compile("patient_[^b]*");
+        Matcher matcher2 = pattern2.matcher("patient_diseaseItemDetail");
+        while (matcher2.find()){
+            System.out.println(matcher2.group());
+        }
+        Pattern pattern3 = Pattern.compile("(medical_targetedTherapy)|(medical_medicine)|(medical_method)");
+        Matcher matcher3 = pattern3.matcher("medical_medicine");
+        while (matcher3.find()){
+            System.out.println(matcher3.group());
+        }
     }
 
     @Test
