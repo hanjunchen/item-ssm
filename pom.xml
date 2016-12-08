@@ -31,7 +31,7 @@
             <version>${mysql.driver.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- log4j依赖 -->
+        <!-- log4j依赖，logging for java -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
