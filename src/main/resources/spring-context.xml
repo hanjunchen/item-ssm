@@ -39,6 +39,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <!--<aop:aspectj-autoproxy/>-->
     <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
@@ -77,8 +78,5 @@
     </bean>
     <!-- 开启spring aop支持，作用同@EnableAspectJAutoProxy注解 -->
     <!--<bean class="com.hsgene.test.AopTest"/>-->
-
-    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-
 
 </beans>

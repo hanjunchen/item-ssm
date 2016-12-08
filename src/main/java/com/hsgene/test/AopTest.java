@@ -2,8 +2,10 @@ package com.hsgene.test;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Component;
  * 由切入点Pointcut和通知advice组成(增强操作)
  */
 
-//@EnableAspectJAutoProxy(proxyTargetClass = true)  // 等同于xml中配置aop:aspectj-autoproxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)  // 等同于xml中配置aop:aspectj-autoproxy
 @Component
 @Aspect
 public class AopTest {
@@ -29,10 +31,10 @@ public class AopTest {
 
     /**
      * 前置通知
-     * @param joinPoint 不是必需的
+     * @param joinPoint 不是必需的，但是不能是ProceedingJoinPoint对象，只能是其接口对象JoinPoint，ProceedingJoinPoint对象只支持Around advice
      */
     @Before("aspect()")
-    public void before(ProceedingJoinPoint joinPoint){
+    public void before(JoinPoint joinPoint){
         logger.debug("环绕通知==切入类型：" + joinPoint.getKind());
         logger.debug("前置通知==对象：" + joinPoint.getTarget().getClass().getTypeName());
     }
