@@ -4,6 +4,7 @@ import com.hsgene.common.BaseService;
 import com.hsgene.dao.EmployeeDao;
 import com.hsgene.entity.Employee;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by hjc on 2016/10/15.
  */
+@Transactional
 @Service
 public class EmployeeService extends BaseService<Employee> {
 

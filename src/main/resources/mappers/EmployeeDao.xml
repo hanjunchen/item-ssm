@@ -3,14 +3,31 @@
 
     <select id="findList" resultType="Employee">
         SELECT
-         e.id AS "id",
-         e.name AS "name",
-         e.sex AS "sex",
-         e.job AS "job",
-         e.identity_card AS "identityCard",
-         e.dept_no AS "deptNo",
-         e.create_date AS "createDate"
-         FROM employee e
+        e.id AS "id",
+        e.name AS "name",
+        e.sex AS "sex",
+        e.job AS "job",
+        e.identity_card AS "identityCard",
+        e.dept_no AS "deptNo",
+        e.create_date AS "createDate"
+        FROM employee e
+        <where>
+            <if test="id != null and id != ''">
+                e.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                AND e.name LIKE concat('%',#{name},'%')
+            </if>
+            <if test="sex != null and sex != ''">
+                AND e.sex = #{sex}
+            </if>
+            <if test="job != null and job != ''">
+                AND e.job LIKE concat('%',#{job},'%')
+            </if>
+            <if test="deptNo != null and deptNo != ''">
+                AND e.dept_no = #{deptNo}
+            </if>
+        </where>
     </select>
 
     <select id="getById" resultType="Employee">

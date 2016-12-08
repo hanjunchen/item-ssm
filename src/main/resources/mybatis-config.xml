@@ -20,6 +20,12 @@
         <!--<package name="com.hsgene.entity"/>-->
     </typeAliases>
 
-    <!-- 剩余的配置都交给spring管理 -->
+    <!-- 数据源配置交给spring管理 -->
+
+    <plugins>
+        <plugin interceptor="com.hsgene.interceptor.Pagination">
+            <property name="pageSize" value="10"/>
+        </plugin>
+    </plugins>
 
 </configuration>

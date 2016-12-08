@@ -1,8 +1,6 @@
 package com.hsgene.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +11,8 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder    // 必须有一个全参的构造方法
 public class Employee implements Serializable{
 
     private static final long serialVersionUID = 5330869888126501633L;
@@ -28,6 +28,8 @@ public class Employee implements Serializable{
     //  实体类属性类型与数据库字段类型不一致，就不能插入和更新操作，只能查询（会自动转换类型）
     private Date createDate;
 
+    private UpToken upToken;    // 提供测试SystemMetaObject对象
+
     public Employee(String name,Integer sex,String job,Integer accessLevel,String identityCard,Integer deptNo,Date createDate){
         this.name = name;
         this.sex = sex;
@@ -37,4 +39,5 @@ public class Employee implements Serializable{
         this.deptNo = deptNo;
         this.createDate = createDate;
     }
+
 }

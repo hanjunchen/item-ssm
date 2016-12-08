@@ -28,3 +28,11 @@ spring AOP：可以直接切入除controller之外的任意类的方法上,而co
 execution(* org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter.handle(..))
 因为controller注解的类，都被org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter给代理了
 springMVC拦截器:用于拦截controller中的方法
+mybatis插件:和拦截器一样，但是只能拦截ParameterHandler、ResultSetHandler、StatementHandler、Executor四个对象，
+在拦截器类上面指定签名具体的被拦截对象
+AOP中有一个引入功能Introduction，可以动态的生成对象变量和方法
+一般当源代码不能修改时使用AOP来增强方法
+
+注意：AOP、springMVC拦截器、mybatis拦截器都是基于JDK的动态代理实现的（基于接口和cglib两种）；
+前两者可以在方法前后执行额外处理，其中springMVC拦截器的postHandler方法和aop后置通知AfterReturning方法功能一样，在业务方法返回值时对返回值进行操作
+而mybatis插件拦截的功能比较固定
