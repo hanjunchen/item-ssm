@@ -12,10 +12,10 @@ import java.sql.Connection;
 import java.util.Properties;
 
 /**
- * Created by hjc on 2016/12/8.
  * mybatis插件
  * 专门拦截ParameterHandler、ResultSetHandler、StatementHandler、Executor四个对象中的方法
  * 拦截StatementHandler中的prepare或Executor中的query方法，在sql预编译之前操作sql
+ * Created by hjc on 2016/12/8.
  */
 //  签名指定拦截StatementHandler对象的prepare方法，方法参数是args，相当于springMVC中定义拦截器后需要在xml文件mvc:interceptors标签中指定被拦截对象
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class})})
