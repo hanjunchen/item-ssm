@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,12 +13,12 @@ import org.springframework.stereotype.Component;
  * 由切入点Pointcut和通知advice组成(增强操作)
  */
 
-@EnableAspectJAutoProxy(proxyTargetClass = true)  // 等同于xml中配置aop:aspectj-autoproxy
+//@EnableAspectJAutoProxy(proxyTargetClass = true)  // 等同于xml中配置aop:aspectj-autoproxy
 @Component
 @Aspect
-public class AopTest {
+public class AspectTest {
 
-    private Logger logger = Logger.getLogger(AopTest.class);
+    private Logger logger = Logger.getLogger(AspectTest.class);
 
     /**
      * 定义切入点和切入点正则
@@ -35,7 +34,7 @@ public class AopTest {
      */
     @Before("aspect()")
     public void before(JoinPoint joinPoint){
-        logger.debug("环绕通知==切入类型：" + joinPoint.getKind());
+        logger.debug("前置通知==切入类型：" + joinPoint.getKind());
         logger.debug("前置通知==对象：" + joinPoint.getTarget().getClass().getTypeName());
     }
 
@@ -59,6 +58,7 @@ public class AopTest {
 
     /**
      * 后置通知
+     * 只有正常返回值时才会通知
      * @param returnValue 被切入方法返回值，方法无返回值其为null
      */
     @AfterReturning(pointcut = "aspect()",returning = "returnValue")
@@ -68,10 +68,11 @@ public class AopTest {
 
     /**
      * 最终通知
+     * 不论是否发生异常
      */
     @After("aspect()")
     public void after(){
-        logger.debug("最终通知==一般用于清空关闭资源");
+        logger.debug("最终通知==清空关闭资源");
     }
 
     /**

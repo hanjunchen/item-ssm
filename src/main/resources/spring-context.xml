@@ -4,15 +4,16 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/tx/spring-aop-4.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--指定xsi:schemaLocation时不用指定版本，否则有些标签可能无法识别导致容器无法初始化 -->
 
     <!-- 这里和spring-mvc扫描注解功能重复，所以需要分别配置两个的include和exclude，针对Controller类，而且该标签包含了context:annotation-config标签的功能 -->
     <context:component-scan base-package="com.hsgene">
-        <!-- @Service、@Resource、@Component等注解都由spring父容器来扫描，但是不能和子容器重复扫描Controller，否则事务使用会出问题 -->
+        <!-- @Service、@Resource、@Component等注解都由spring父容器来扫描，但是不能和子容器重复扫描@Controller，否则事务使用会出问题 -->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!-- 读取properties配置文件，注意这里要设置system-properties-mode属性为FALLBACK，其默认为ENVIRONMENT，会先读取系统环境中的属性，再读取location指定文件中的属性，而username属性系统环境中也有，所以会先读取系统用户名 -->
@@ -35,13 +36,14 @@
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="300000"/>
     </bean>
-    <!-- 使用数据源配置事务管理，使用的时候使用注解@Transactional或AOP方式 -->
+    <!-- 为事务管理配置数据源，通过@Transactional注解或AOP方式使用它 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <!--<aop:aspectj-autoproxy/>-->
-    <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+    <!-- 配置 Annotation 驱动，扫描@Transactional注解的类或方法  -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!-- 开启切面自动代理，作用同@EnableAspectJAutoProxy注解，目标对象无接口时使用cglib动态代理，否则使用JDK动态代理 -->
+    <aop:aspectj-autoproxy/>
     <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -76,7 +78,5 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!--<property name="annotationClass" value="com.hsgene.common.MyBatisDao"/>-->
     </bean>
-    <!-- 开启spring aop支持，作用同@EnableAspectJAutoProxy注解 -->
-    <!--<bean class="com.hsgene.test.AopTest"/>-->
 
 </beans>

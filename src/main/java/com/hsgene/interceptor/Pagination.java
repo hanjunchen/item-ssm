@@ -1,6 +1,7 @@
 package com.hsgene.interceptor;
 
 import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
@@ -30,7 +31,6 @@ public class Pagination implements Interceptor, Serializable {
 
     /**
      * 拦截增强操作
-     *
      * @param invocation 封装被拦截对象的反射信息
      * @return
      * @throws Throwable
@@ -38,11 +38,15 @@ public class Pagination implements Interceptor, Serializable {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         //  获取被拦截对象反射
+        logger.debug("拦截prepare方法");
         Object obj = invocation.getTarget();
         MetaObject metaObject = SystemMetaObject.forObject(obj);
-        logger.debug("");
+        StatementHandler delegate = (StatementHandler) metaObject.getValue("delegate");
+        BoundSql boundSql = delegate.getBoundSql();
+        boundSql.getSql();
+        boundSql.getParameterObject();
         Object o = invocation.proceed();
-        logger.debug("");
+        logger.debug("继续调用prepare方法");
         return o;
     }
 
