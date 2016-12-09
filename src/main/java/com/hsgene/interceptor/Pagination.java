@@ -31,13 +31,13 @@ public class Pagination implements Interceptor, Serializable {
 
     /**
      * 拦截增强操作
-     * @param invocation 封装被拦截对象的反射信息
+     * @param invocation 封装被拦截对象的反射信息，
+     * 如果有多个拦截插件，该对象可能不是原对象，而是代理链中的一个代理对象
      * @return
      * @throws Throwable
      */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        //  获取被拦截对象反射
         logger.debug("拦截prepare方法");
         Object obj = invocation.getTarget();
         MetaObject metaObject = SystemMetaObject.forObject(obj);
