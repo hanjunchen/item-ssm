@@ -18,6 +18,13 @@ public class MetaObjectTest {
     @Test
     public void testMetaObj() {
         Employee employee = Employee.builder().createDate(new Date()).upToken(UpToken.builder().upToken("123456").build()).build();
+        //  new Employee(){{}}语法可以代替@Builder注解
+        employee = new Employee() {{
+            setCreateDate(new Date());
+            setUpToken(new UpToken() {{
+                setUpToken("123456");
+            }});
+        }};
         //  mybatis反射操作对象
         MetaObject metaObject = SystemMetaObject.forObject(employee);
         System.out.println(metaObject.getSetterNames());

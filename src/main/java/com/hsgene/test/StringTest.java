@@ -16,4 +16,12 @@ public class StringTest {
     public void testIndexOf(){
         System.out.println("\"qwe123\"".indexOf("\"", 1));
     }
+
+    @Test
+    public void testStringBuffer(){
+        String s = "sss";
+        StringBuffer sb = new StringBuffer(s);
+        s = "bbb";
+        System.out.println(sb);
+    }
 }

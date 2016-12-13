@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder    // 必须有一个全参的构造方法
+@Builder    // 必须有一个全参的构造方法----而new Employee(){{}}语法不需要
 public class Employee implements Serializable{
 
     private static final long serialVersionUID = 5330869888126501633L;
