@@ -7,7 +7,7 @@
 4、设置编码
 5、pom中添加jetty:run服务器插件依赖，配置jetty:run时before项设为make---但是jetty不好热部署，
    所以选择tomcat设置on update action(必需在debug下才有效，且只对静态文件有效)，
-   tomcat需要记得设置server.xml文件中的GET方法编码URIEncoding="UTF-8"
+   tomcat需要记得设置server.xml文件中的GET方法编码URIEncoding="UTF-8"，配置本地tomcat修改源文件后需要重新部署项目
 6、创建java目录指定为源文件目录，指定resources为资源文件目录
 7、指定需编译的源文件目录:
 实际idea下src/main目录下的三个目录：java、resources、webapp同属一个目录，编译后其中的资源都直接在一个根目录下
