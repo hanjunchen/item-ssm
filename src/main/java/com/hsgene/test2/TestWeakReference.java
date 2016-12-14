@@ -34,7 +34,7 @@ public class TestWeakReference {
                 break;
             }
         }
-        int j = 0;
+        /*int j = 0;
         while (true) {
             System.out.println("强引用对象循环 " + j + " 次：" + employee);  //  对象的强引用一直被使用，对象始终不会被回收
             if (weakReference.get() != null) {
@@ -44,6 +44,6 @@ public class TestWeakReference {
                 System.out.println("对象被GC回收！");
                 break;
             }
-        }
+        }*/
     }
 }
