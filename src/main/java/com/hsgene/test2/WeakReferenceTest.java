@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 public class WeakReferenceTest {
 
     /**
-     * 使用场景：很容易被重新构建, 且很消耗内存的对象
+     * 使用场景：很容易被重新构建, 且很消耗内存的对象，主对象依赖于次对象，主对象一直被使用，但是用不到次对象，次对象的弱引用会被回收
      */
     @Test
     public void testWeakReference() {
