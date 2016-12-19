@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
 /**
  * Created by hjc on 2016/12/13.
  */
-public class TestWeakReference {
+public class WeakReferenceTest {
 
     /**
      * 使用场景：很容易被重新构建, 且很消耗内存的对象
