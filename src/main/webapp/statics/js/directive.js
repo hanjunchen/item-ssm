@@ -40,3 +40,26 @@ function dropzone() {
         }
     };
 }
+//  自定义验证指令
+angular.module('myApp').directive('rule', function () {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=rule"
+        },
+        link: function (scope, element, attr, ngModel) {
+
+            ngModel.$validators.rule = function (modelValue) {
+                var reg = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,18}$');
+                if (reg.test(modelValue)) {
+                    return true;
+                }
+                return false;
+            };
+
+            scope.$watch("otherModelValue", function () {
+                ngModel.$validate();
+            });
+        }
+    };
+});
