@@ -67,5 +67,7 @@
       DELETE FROM employee WHERE id = #{id}
     </delete>
 
-    <!-- 使用foreach标签可以在insert、update、delete语句中进行批量增删改 -->
+    <!-- 使用foreach标签可以在insert、update、delete语句中进行批量增删改
+    批量插入时，将多个数据放在一条insert语句中插入，并且每条INSERT语句插入10条记录的做法最为高效：
+    insert into tableName (,,) values (,,),(,,)...-->
 </mapper>
