@@ -8,24 +8,69 @@ import java.util.regex.Pattern;
 
 /**
  * Created by hjc on 2016/11/11.
+ * java正则和js正则语法基本一致
  */
 public class PatternTest {
 
+    /**
+     * 捕获组匹配、预测先行后行搜索/零宽断言===最大的特点就是不消费字符，只规定前或后位置字符
+     */
     @Test
-    public void testString(){
+    public void testGroup() {
+        //  ***正则中加边界^和$是为了完全匹配
+        Pattern pattern = Pattern.compile("(一组)(二组)(三组)\\2+");  //  \n选取捕获组，\2反向引用
+        Matcher matcher = pattern.matcher("一组二组三组二组");
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+        Pattern pattern2 = Pattern.compile("(一组)(?:二组)(三组)\\2+");   //  ?:使该组()不作为捕获组
+        Matcher matcher2 = pattern2.matcher("一组二组三组三组组");
+        while (matcher2.find()) {
+            System.out.println(matcher2.group());
+        }
+        Pattern pattern3 = Pattern.compile("起始点字符(?=a|b|c)");   //  ?=匹配该位置但不消费字符，不作为捕获组，与?<=相反（?=规定字符串后的位置必须是xxx，?<=规定字符串前的位置必须是xxx）
+        Matcher matcher3 = pattern3.matcher("起始点字符b");
+        while (matcher3.find()) {
+            System.out.println(matcher3.group());
+        }
+        Pattern pattern4 = Pattern.compile("起始点字符(?!a|b|c)[0-9]+");   //  ?!该位置不匹配不消费字符，不作为捕获组，与?<!相反，一个匹配后位置一个前位置
+        Matcher matcher4 = pattern4.matcher("起始点字符d123");
+        while (matcher4.find()) {
+            System.out.println(matcher4.group());
+        }
+        //  其中反向零宽断言?!实用性很大，经常会用到，经常用于不包含某些字符的情况（不以xxx开始、不以xxx结尾、不能是全数字和全字母等取反情况可数的时候）
+        //  [^a]与(?!a)的区别：前者会匹配到一个字符，后者只匹配一个位置，不消费字符，规定该位置不能是a才会与其匹配
+        //  上述正则：第一个非捕获组中，这个正则关键就是$匹配了字符串的右边界--->当只输入数字时，当前字符串直到末尾都是数字，与(?![0-9]+$)不匹配
+        //  同理，只输入字母时，与(?![a-zA-Z]+$)不匹配，只有同时输入数字和字母时，前两个非捕获组才能匹配，然后再检查{8,18}$，注意以$结尾，表示完全匹配，不加^和$只能部分匹配
+        //  死方法：当复杂正则难以写出时，可以将一个正则分解成多个整个，分别进行判断即可
+        Pattern pattern5 = Pattern.compile("(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$");
+        Matcher matcher5 = pattern5.matcher("123aaa11");
+        while (matcher5.find()) {
+            System.out.println(matcher5.group());
+        }
+        //  详细教程：http://deerchao.net/tutorials/regex/regex.htm#negativelookaround
+        Pattern pattern6 = Pattern.compile("(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$");
+        Matcher matcher6 = pattern6.matcher("123aaa11");
+        while (matcher6.find()) {
+            System.out.println(matcher6.group());
+        }
+    }
+
+    @Test
+    public void testString() {
         Pattern pattern = Pattern.compile("\"[a-zA-Z]+\":\"[^\"]*分子检测");
         Matcher matcher = pattern.matcher("{\"summary\":\"【附件】\",\"moleIns\":\"【分子检测】\",\"chrt\":\"【化疗】\",");
-        while (matcher.find()){
+        while (matcher.find()) {
             System.out.println(matcher.group());
         }
         Pattern pattern2 = Pattern.compile("patient_[^b]+");
         Matcher matcher2 = pattern2.matcher("patient_basic");
-        while (matcher2.find()){
+        while (matcher2.find()) {
             System.out.println(matcher2.group());
         }
         Pattern pattern3 = Pattern.compile("(medical_targetedTherapy)|(medical_medicine)|(medical_method)");
         Matcher matcher3 = pattern3.matcher("medical_medicine");
-        while (matcher3.find()){
+        while (matcher3.find()) {
             System.out.println(matcher3.group());
         }
     }

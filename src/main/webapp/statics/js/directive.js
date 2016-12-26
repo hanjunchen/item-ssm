@@ -51,10 +51,15 @@ angular.module('myApp').directive('rule', function () {
             //  为指令所在标签的ng-model添加一个验证方法
             ngModel.$validators.rule = function (modelValue) {
                 var reg = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,18}$');
-                if (reg.test(modelValue)) {
+                if (!ngModel.$$success.required) {  //  通过在console中观察ngModel对象，这个值与页面上的modelForm.name.$error.required值是相反的
                     return true;
+                } else {
+                    if (reg.test(modelValue)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
-                return false;
             };
             //  监听自定义指令的值，改变时执行上述方法验证，当不指定时默认值就是所在标签的ng-model的值
             scope.$watch("otherModelValue", function () {
