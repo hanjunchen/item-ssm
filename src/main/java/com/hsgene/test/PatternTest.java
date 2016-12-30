@@ -33,8 +33,8 @@ public class PatternTest {
         while (matcher3.find()) {
             System.out.println(matcher3.group());
         }
-        Pattern pattern4 = Pattern.compile("起始点字符(?!a|b|c)[0-9]+");   //  ?!该位置不匹配不消费字符，不作为捕获组，与?<!相反，一个匹配后位置一个前位置
-        Matcher matcher4 = pattern4.matcher("起始点字符d123");
+        Pattern pattern4 = Pattern.compile("起始点字符(?!a|b|c)a+");   //  ?!该位置不匹配不消费字符，后断，不作为捕获组，与?<!相反，前断
+        Matcher matcher4 = pattern4.matcher("起始点字符d");   //  要求(?!a|b|c)位置必须是
         while (matcher4.find()) {
             System.out.println(matcher4.group());
         }
@@ -47,8 +47,8 @@ public class PatternTest {
             System.out.println(matcher5.group());
         }
         //  详细教程：http://deerchao.net/tutorials/regex/regex.htm#negativelookaround
-        Pattern pattern6 = Pattern.compile("(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$");
-        Matcher matcher6 = pattern6.matcher("123aaa11");
+        Pattern pattern6 = Pattern.compile("(?<=<(\\w+)>).*(?=</\\1>)");
+        Matcher matcher6 = pattern6.matcher("<span>呵呵哒</span>");
         while (matcher6.find()) {
             System.out.println(matcher6.group());
         }
