@@ -70,7 +70,7 @@ public class TimerTaskTest {
 
     /**
      * 定时任务方式三
-     * 该方式首选，具有Timer的特性，同时基于线程池来执行任务，而Timer则是单线程
+     * 具有Timer的特性，同时基于线程池来执行任务，而Timer则是单线程
      * @param args
      */
     public static void main(String[] args) {
@@ -83,4 +83,12 @@ public class TimerTaskTest {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleAtFixedRate(runnable, 0, 2, TimeUnit.SECONDS);
     }
+
+    /**
+     * 定时任务方式四
+     * Spring的注解(@Scheduled)创建计划任务
+     * 1、创建一个Java类，添加一个无参无返回值的方法，在方法上用@Scheduled注解修饰一下；
+     * 2、在Spring配置文件中添加三个<task:**** />节点；
+     */
+
 }

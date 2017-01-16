@@ -4,11 +4,13 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
     <!--指定xsi:schemaLocation时不用指定版本，否则有些标签可能无法识别导致容器无法初始化 -->
 
     <!-- 这里和spring-mvc扫描注解功能重复，所以需要分别配置两个的include和exclude，针对Controller类，而且该标签包含了context:annotation-config标签的功能 -->
@@ -18,6 +20,10 @@
     </context:component-scan>
     <!-- 读取properties配置文件，注意这里要设置system-properties-mode属性为FALLBACK，其默认为ENVIRONMENT，会先读取系统环境中的属性，再读取location指定文件中的属性，而username属性系统环境中也有，所以会先读取系统用户名 -->
     <context:property-placeholder location="classpath:db.properties" system-properties-mode="FALLBACK"/>
+    <!-- spring计划任务配置，用 @Component @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
+    <task:executor id="executor" pool-size="5"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
     <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
     <!-- 配置dbcp数据源，带连接池，指定应用停止后数据源销毁方法，数据源对象为单例 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
