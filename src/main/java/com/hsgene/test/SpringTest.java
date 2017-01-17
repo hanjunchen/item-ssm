@@ -24,7 +24,7 @@ public class SpringTest {
 
     @Before
     public void setup() {
-        //  获取spring容器上下文
+        //  获取spring容器上下文，一般这种方式用于测试时手动获取上下文，而当spring容器已经启动了就不推荐再使用这种方式获取，否则每次都要初始化相当于重启一次服务器，而是使用实现ApplicationContextAware接口的方式，由spring容器自己获取上下文
         applicationContext = new ClassPathXmlApplicationContext("spring-context.xml");
         //  SqlSessionTemplate存在于spring中，而spring中的SqlSessionTemplate已被注入了相应的属性，
         //  所以只有从spring中拿到的SqlSessionTemplate才是我们需要的
