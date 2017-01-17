@@ -142,6 +142,18 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- spring集成redis数据操作依赖 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.6.0.RELEASE</version>
+        </dependency>
+        <!-- 操作redis数据库的java客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.5.1</version>
+        </dependency>
         <!-- 用于支持spring aop切面注解 -->
         <dependency>
             <groupId>org.aspectj</groupId>
