@@ -89,6 +89,7 @@ public class TimerTaskTest {
      * Spring的注解(@Scheduled)创建计划任务
      * 1、创建一个Java类，添加一个无参无返回值的方法，在方法上用@Scheduled注解修饰一下；
      * 2、在Spring配置文件中添加三个<task:**** />节点；
+     * 3、该注解定义的方法在服务器启动时会自动执行(也可以使用@PostConstruct注解标注一个void非静态无异常声明的方法)
      */
 
 }
