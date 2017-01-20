@@ -29,7 +29,7 @@ public class RedisTest {
     public void testList(){
         String[] s = {"qwe","asd","zxc"};
         List<String> list = Arrays.asList(s);
-        System.out.println(redisTemplate == null);
+        System.out.println(JSON.toJSONString(redisTemplate));
         redisTemplate.boundValueOps("memberIds").set(JSON.toJSONString(list));
         System.out.println(redisTemplate.boundValueOps("memberIds").get());
     }
