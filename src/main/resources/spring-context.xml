@@ -20,6 +20,13 @@
     </context:component-scan>
     <!-- 读取properties配置文件，注意这里要设置system-properties-mode属性为FALLBACK，其默认为ENVIRONMENT，会先读取系统环境中的属性，再读取location指定文件中的属性，而username属性系统环境中也有，所以会先读取系统用户名 -->
     <context:property-placeholder location="classpath:db.properties" system-properties-mode="FALLBACK"/>
+    <!-- 配置spring线程池，提供多线程功能 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="50" />
+        <property name="maxPoolSize" value="50" />
+        <property name="queueCapacity" value="1000" />
+        <property name="keepAliveSeconds" value="60" />
+    </bean>
     <!-- spring计划任务配置，用 @Component @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
     <task:executor id="executor" pool-size="5"/>
     <task:scheduler id="scheduler" pool-size="10"/>
