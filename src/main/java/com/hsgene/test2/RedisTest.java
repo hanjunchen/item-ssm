@@ -29,8 +29,11 @@ public class RedisTest {
     public void testList(){
         String[] s = {"qwe","asd","zxc"};
         List<String> list = Lists.newArrayList(s);
-        System.out.println(JSON.toJSONString(redisTemplate));
+//        System.out.println(JSON.toJSONString(redisTemplate));
         redisTemplate.boundValueOps("memberIds").set(JSON.toJSONString(list));
-        System.out.println(redisTemplate.boundValueOps("memberIds").get());
+        String memberIds = (String) redisTemplate.boundValueOps("memberIds").get();
+        System.out.println(JSON.parseArray(memberIds).get(0));
+        redisTemplate.boundListOps("memberList").set(1L,list);
+        System.out.println(redisTemplate.boundListOps("memberList").getOperations());
     }
 }
