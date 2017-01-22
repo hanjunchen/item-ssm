@@ -1,13 +1,13 @@
 package com.hsgene.test2;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +28,7 @@ public class RedisTest {
     @Test
     public void testList(){
         String[] s = {"qwe","asd","zxc"};
-        List<String> list = Arrays.asList(s);
+        List<String> list = Lists.newArrayList(s);
         System.out.println(JSON.toJSONString(redisTemplate));
         redisTemplate.boundValueOps("memberIds").set(JSON.toJSONString(list));
         System.out.println(redisTemplate.boundValueOps("memberIds").get());

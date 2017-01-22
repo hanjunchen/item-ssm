@@ -15,6 +15,7 @@
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
         <spring.version>4.2.2.RELEASE</spring.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
+        <guava.version>19.0</guava.version>
     </properties>
     <dependencies>
         <!-- hamcrest-core包是junit的依赖包 -->
@@ -276,8 +277,9 @@
             <artifactId>simple-react</artifactId>
             <version>0.99.7.1</version>
         </dependency>
-        <!-- 下面依赖需要单独配置日志，否则会配置的log4j冲突，导致log4j不生效，还会影响redis -->
-        <!--<dependency>
+        <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象 -->
+        <!-- 该依赖需要单独配置日志，否则会配置的log4j冲突，导致log4j不生效，还会影响redis -->
+        <dependency>
             <groupId>com.aol.simplereact</groupId>
             <artifactId>cyclops-react</artifactId>
             <version>1.0.2</version>
@@ -291,7 +293,13 @@
                     <artifactId>slf4j-simple</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>-->
+        </dependency>
+        <!-- google java lib、提供Lists类 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
 
         <!-- 操作Excel表格类库，提供SXSSFWorkbook对象支持百万级的数据导入导出 -->
         <dependency>
