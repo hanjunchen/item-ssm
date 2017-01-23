@@ -274,7 +274,7 @@
             <version>2.5.1</version>
         </dependency>
         <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象 -->
-        <!-- 该依赖需要单独配置日志，否则会配置的log4j冲突，导致log4j不生效，还会影响redis -->
+        <!-- 该依赖需要单独配置日志，否则会与log4j冲突，导致log4j不生效，还会影响redis -->
         <dependency>
             <groupId>com.aol.simplereact</groupId>
             <artifactId>cyclops-react</artifactId>

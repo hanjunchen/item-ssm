@@ -1,4 +1,4 @@
-package com.hsgene.test2;
+package com.hsgene.test1;
 
 import com.alibaba.fastjson.JSON;
 import com.hsgene.entity.Employee;
