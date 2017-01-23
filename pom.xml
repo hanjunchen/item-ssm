@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>item-ssm Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <!-- properties属性用于集中管理依赖jar包版本 -->
     <properties>
         <mysql.driver.version>5.1.30</mysql.driver.version>
@@ -17,6 +18,7 @@
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <guava.version>19.0</guava.version>
     </properties>
+
     <dependencies>
         <!-- hamcrest-core包是junit的依赖包 -->
         <dependency>
@@ -25,32 +27,32 @@
             <version>4.11</version>
             <!--<scope>test</scope>-->
         </dependency>
-        <!-- 数据库驱动依赖 -->
+        <!-- Mysql数据库驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.driver.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- log4j依赖，logging for java -->
+        <!-- log4j，logging for java -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-        <!-- mybatis依赖 -->
+        <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <!-- spring整合mybatis依赖 -->
+        <!-- spring整合mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
-        <!-- commons-logging依赖 -->
+        <!-- commons-logging -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -62,13 +64,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-        <!-- lang逐渐被淘汰，现在一般使用lang3 -->
+        <!-- 现在一般使用lang3代替lang -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-        <!-- spring依赖群 -->
+        <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -178,14 +180,14 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
         </dependency>
-        <!-- httpServlet请求依赖jar包 -->
+        <!-- httpServlet请求依赖 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <!--<scope>provided</scope>-->
         </dependency>
-        <!-- jstl标签库依赖 -->
+        <!-- JSTL标准标签库 -->
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
@@ -210,13 +212,13 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
         </dependency>
-        <!-- IO流依赖包 -->
+        <!-- IO流操作 -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-        <!-- 文件上传依赖包 -->
+        <!-- 文件上传 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -244,13 +246,13 @@
             <artifactId>json</artifactId>
             <version>20140107</version>
         </dependency>
-        <!-- 可使用阿里的JSON代替org.json，可二选一 -->
+        <!-- 使用阿里的JSON代替org.json，可二选一 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.12</version>
         </dependency>
-        <!-- lombok工具依赖 -->
+        <!-- lombok工具 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -271,12 +273,6 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
         </dependency>
-        <!-- JDK8的并发流库，例ReactiveSeq对象 -->
-        <dependency>
-            <groupId>com.aol.simplereact</groupId>
-            <artifactId>simple-react</artifactId>
-            <version>0.99.7.1</version>
-        </dependency>
         <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象 -->
         <!-- 该依赖需要单独配置日志，否则会配置的log4j冲突，导致log4j不生效，还会影响redis -->
         <dependency>
@@ -294,13 +290,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- google java lib、提供Lists类 -->
+        <!-- google java lib、提供Lists类、同JDK7相关功能 -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
-
         <!-- 操作Excel表格类库，提供SXSSFWorkbook对象支持百万级的数据导入导出 -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -319,6 +314,7 @@
             <version>3.9</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <!-- jetty:run服务器插件依赖 -->
@@ -361,4 +357,99 @@
             </resource>
         </resources>
     </build>
+
+    <!---->
+    <repositories>
+        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
+        <repository>
+            <id>nexus-repos</id>
+            <name>Team Nexus Repository</name>
+            <url>http://192.168.11.36:8888/nexus/content/groups/public</url>
+        </repository> -->
+
+        <!--<repository>-->
+        <!--<id>oschina-repos</id>-->
+        <!--<name>Oschina Releases</name>-->
+        <!--<url>http://maven.oschina.net/content/groups/public</url>-->
+        <!--</repository>-->
+
+        <repository>
+            <id>java-repos</id>
+            <name>Java Repository</name>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+
+        <repository>
+            <id>springsource-repos</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.spring.io/release/</url>
+        </repository>
+
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>central-repos2</id>
+            <name>Central Repository 2</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+
+        <repository>
+            <id>activiti-repos</id>
+            <name>Activiti Repository</name>
+            <url>https://maven.alfresco.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>activiti-repos2</id>
+            <name>Activiti Repository 2</name>
+            <url>https://app.camunda.com/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>thinkgem-repos</id>
+            <name>ThinkGem Repository</name>
+            <url>http://git.oschina.net/thinkgem/repos/raw/master</url>
+        </repository>
+
+        <repository>
+            <id>thinkgem-repos2</id>
+            <name>ThinkGem Repository 2</name>
+            <url>https://raw.github.com/thinkgem/repository/master</url>
+        </repository>
+
+        <repository>
+            <id>sunry-repos</id>
+            <name>Repository</name>
+            <url>http://git.oschina.net/usenrong/repository/raw/master</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- 设定插件仓库 -->
+    <pluginRepositories>
+        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
+        <pluginRepository>
+            <id>nexus-repos</id>
+            <name>Team Nexus Repository</name>
+            <url>http://192.168.11.36:8888/nexus/content/groups/public</url>
+        </pluginRepository> -->
+
+        <pluginRepository>
+            <id>oschina-repos</id>
+            <name>Oschina Releases</name>
+            <url>http://maven.oschina.net/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- 配置开发、测试、生产环境 -->
+    <profiles>
+
+    </profiles>
+
 </project>
