@@ -1,4 +1,4 @@
-package com.hsgene.test;
+package com.hsgene.test1;
 
 import lombok.Getter;
 import lombok.Setter;

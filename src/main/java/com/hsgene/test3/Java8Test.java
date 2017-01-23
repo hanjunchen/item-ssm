@@ -1,4 +1,4 @@
-package com.hsgene.test2;
+package com.hsgene.test3;
 
 import org.junit.Test;
 

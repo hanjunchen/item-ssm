@@ -1,4 +1,4 @@
-package com.hsgene.util;
+package com.hsgene.utils;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;

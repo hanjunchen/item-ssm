@@ -1,6 +1,6 @@
-package com.hsgene.test;
+package com.hsgene.test1;
 
-import com.hsgene.util.Pinyin4jUtil;
+import com.hsgene.utils.Pinyin4jUtil;
 import org.junit.Test;
 
 /**

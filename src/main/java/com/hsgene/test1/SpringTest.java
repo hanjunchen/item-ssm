@@ -1,4 +1,4 @@
-package com.hsgene.test;
+package com.hsgene.test1;
 
 import com.hsgene.entity.Employee;
 import com.hsgene.service.EmployeeService;
