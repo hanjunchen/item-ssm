@@ -145,13 +145,13 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <!-- spring集成redis数据操作依赖 -->
+        <!-- spring操作redis数据库java客户端，集成兼容其它多种java客户端 -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
             <version>1.6.0.RELEASE</version>
         </dependency>
-        <!-- 操作redis数据库的java客户端 -->
+        <!-- 连接redis数据库驱动（连接工厂） -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
