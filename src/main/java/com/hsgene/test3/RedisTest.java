@@ -36,8 +36,10 @@ public class RedisTest {
         valueOperations.set(JSON.toJSONString(list));
         valueOperations.expire(1, TimeUnit.HOURS);
         System.out.println(JSON.parseArray((String) valueOperations.get()).get(0));
+        List<String> list1 = Lists.newArrayList("abc","def","ghi");
+        System.out.println(list1.get(2));
         BoundListOperations listOperations = redisTemplate.boundListOps("memberList");
-        listOperations.set(1L,JSON.toJSONString(list));
+        listOperations.set(1L,JSON.toJSONString(list1));
         System.out.println(listOperations.index(1L));
     }
 }
