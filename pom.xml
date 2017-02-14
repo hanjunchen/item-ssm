@@ -17,6 +17,7 @@
         <spring.version>4.2.2.RELEASE</spring.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <guava.version>19.0</guava.version>
+        <dozer.version>5.5.1</dozer.version>
     </properties>
 
     <dependencies>
@@ -344,6 +345,12 @@
             <artifactId>stompjms-client</artifactId>
             <version>1.19</version>
         </dependency>-->
+        <!-- DozerBeanMapper工具类，深度赋值对象等功能 -->
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>${dozer.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
