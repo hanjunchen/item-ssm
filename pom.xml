@@ -273,7 +273,7 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
         </dependency>
-        <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象 -->
+        <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象，作用和Stream.of(T t)相同，但是ReactiveSeq更强大（例其distinct该方法可以根据对象属性去重，无需重写comparable等方法） -->
         <!-- 该依赖需要单独配置日志，否则会与log4j冲突，导致log4j不生效，还会影响redis -->
         <dependency>
             <groupId>com.aol.simplereact</groupId>
@@ -313,17 +313,37 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- Apache ActiveMQ和AMQP协议（另外还有mqtt、openwire、stomp协议） -->
+        <!-- Apache ActiveMQ -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jms_1.1_spec</artifactId>
             <version>1.1</version>
         </dependency>
+        <!-- 四种JMS应用协议，选其一 -->
+        <!-- openWire协议 -->
         <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>5.14.3</version>
+        </dependency>
+        <!-- AMQP协议-->
+        <!--<dependency>
             <groupId>org.apache.qpid</groupId>
             <artifactId>qpid-jms-client</artifactId>
             <version>0.11.1</version>
-        </dependency>
+        </dependency>-->
+        <!-- mqtt协议 -->
+        <!--<dependency>
+            <groupId>org.fusesource.mqtt-client</groupId>
+            <artifactId>mqtt-client</artifactId>
+            <version>1.14</version>
+        </dependency>-->
+        <!-- stomp协议 -->
+        <!--<dependency>
+            <groupId>org.fusesource.stompjms</groupId>
+            <artifactId>stompjms-client</artifactId>
+            <version>1.19</version>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -383,6 +403,20 @@
         <!--<name>Oschina Releases</name>-->
         <!--<url>http://maven.oschina.net/content/groups/public</url>-->
         <!--</repository>-->
+
+        <!-- 阿里云私服 -->
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
 
         <repository>
             <id>java-repos</id>
