@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hsgene.testMQ;
+package com.hsgene.testActiveMQ;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQTopic;
 
 import javax.jms.*;
 
-class Listener {
+class Publisher {
 
     public static void main(String []args) throws JMSException {
 
@@ -31,45 +31,36 @@ class Listener {
         int port = Integer.parseInt(env("ACTIVEMQ_PORT", "61616"));
         String destination = arg(args, 0, "event");
 
+        int messages = 10000;
+        int size = 256;
+
+        String DATA = "abcdefghijklmnopqrstuvwxyz";
+        String body = "";
+        for( int i=0; i < size; i ++) {
+            body += DATA.charAt(i%DATA.length());
+        }
+
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://" + host + ":" + port);
 
         Connection connection = factory.createConnection(user, password);
         connection.start();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         Destination dest = new ActiveMQTopic(destination);
+        MessageProducer producer = session.createProducer(dest);
+        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-        MessageConsumer consumer = session.createConsumer(dest);
-        long start = System.currentTimeMillis();
-        long count = 1;
-        System.out.println("Waiting for messages...");
-        while(true) {
-            Message msg = consumer.receive();
-            if( msg instanceof  TextMessage ) {
-                String body = ((TextMessage) msg).getText();
-                if( "SHUTDOWN".equals(body)) {
-                    long diff = System.currentTimeMillis() - start;
-                    System.out.println(String.format("Received %d in %.2f seconds", count, (1.0*diff/1000.0)));
-                    break;
-                } else {
-                    if( count != msg.getIntProperty("id") ) {
-                        System.out.println("mismatch: "+count+"!="+msg.getIntProperty("id"));
-                    }
-                    count = msg.getIntProperty("id");
-
-                    if( count == 0 ) {
-                        start = System.currentTimeMillis();
-                    }
-                    if( count % 1000 == 0 ) {
-                        System.out.println(String.format("Received %d messages.", count));
-                    }
-                    count ++;
-                }
-
-            } else {
-                System.out.println("Unexpected message type: "+msg.getClass());
+        for( int i=1; i <= messages; i ++) {
+            TextMessage msg = session.createTextMessage(body);
+            msg.setIntProperty("id", i);
+            producer.send(msg);
+            if( (i % 1000) == 0) {
+                System.out.println(String.format("Sent %d messages", i));
             }
         }
+
+        producer.send(session.createTextMessage("SHUTDOWN"));
         connection.close();
+
     }
 
     private static String env(String key, String defaultValue) {
@@ -85,4 +76,5 @@ class Listener {
         else
             return defaultValue;
     }
+
 }
