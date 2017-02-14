@@ -273,7 +273,7 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
         </dependency>
-        <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象，作用和Stream.of(T t)相同，但是ReactiveSeq更强大（例其distinct该方法可以根据对象属性去重，无需重写comparable等方法） -->
+        <!-- JDK8的并发流库依赖，Mutable、ReactiveSeq等对象，其中ReactiveSeq.of()和Stream.of(T t)相同（操作数组），但是ReactiveSeq更强大（例其distinct该方法可以根据对象属性去重，无需重写comparable等方法） -->
         <!-- 该依赖需要单独配置日志，否则会与log4j冲突，导致log4j不生效，还会影响redis -->
         <dependency>
             <groupId>com.aol.simplereact</groupId>
