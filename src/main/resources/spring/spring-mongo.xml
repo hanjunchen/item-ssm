@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+    <!-- mongodb数据源，host和port属性等价于replica-set属性 -->
+    <mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}">
+        <mongo:options connections-per-host="${mongo.connectionsPerHost}"
+                       threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+                       connect-timeout="${mongo.connectTimeout}"
+                       max-wait-time="${mongo.maxWaitTime}"
+                       auto-connect-retry="${mongo.autoConnectRetry}"
+                       write-number="${mongo.writeNumber}"
+                       write-timeout="${mongo.writeTimeout}"
+                       socket-keep-alive="${mongo.socketKeepAlive}"
+                       socket-timeout="${mongo.socketTimeout}"
+                       slave-ok="${mongo.slaveOk}"
+                       write-fsync="${mongo.writeFsync}"/>
+    </mongo:mongo>
+
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"
+                      dbname="${mongo.dbname}" username="${mongo.username}" password="${mongo.password}"/>
+
+    <bean class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+</beans>

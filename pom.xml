@@ -146,6 +146,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- mongoTemplate依赖 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.8.0.RELEASE</version>
+        </dependency>
         <!-- spring操作redis数据库java客户端，集成兼容其它多种java客户端 -->
         <dependency>
             <groupId>org.springframework.data</groupId>
