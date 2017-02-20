@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.BoundValueOperations;
@@ -16,6 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Created by hjc on 2017/1/17.
  */
 public class RedisTest {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     private static ApplicationContext applicationContext;
     private static RedisTemplate redisTemplate;

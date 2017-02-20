@@ -1,6 +1,8 @@
 package com.hsgene.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,9 +15,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder    // 必须有一个全参的构造方法----而new Employee(){{}}语法不需要
+@TypeAlias(value = "EmployeeList")
 public class Employee implements Serializable{
 
     private static final long serialVersionUID = 5330869888126501633L;
+    @Id
     private Integer id;
     private String name;
     private Integer sex;    //  性别字典在页面上转换显示
