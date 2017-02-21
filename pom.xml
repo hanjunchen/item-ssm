@@ -359,49 +359,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- jetty:run服务器插件依赖 -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
-                <configuration>
-                    <!-- 1秒进行一次热部署，但是仍需要手动ctrl+F9编译一下，故使用tomcat替代jetty -->
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                    <httpConnector>
-                        <port>81</port>
-                    </httpConnector>
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                    </webAppConfig>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>org.mortbay.util.URI.charset</name>
-                            <value>UTF-8</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
-        </plugins>
-        <!--  编译部署文件名需要与artifact中out directory一致  -->
-        <finalName>item-ssm</finalName>
-        <!-- 编译需要指定编译源文件和编译输出目标目录，这里指定编译源文件 -->
-        <!-- 配置需编译文件目录，浏览器访问时的都是编译后的文件，所以如果访问的文件没有编译则会找不到资源 -->
-        <!-- 编译后的项目根目录是classes，在jetty:run中的项目访问时url一般都不需要项目名 -->
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
-        </resources>
-    </build>
-
     <!---->
     <repositories>
         <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
@@ -505,9 +462,82 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!-- 设置插件和编译、打包目录 -->
+    <build>
+        <plugins>
+            <!-- jetty:run服务器插件依赖 -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.7.v20160115</version>
+                <configuration>
+                    <!-- 1秒进行一次热部署，但是仍需要手动ctrl+F9编译一下，故使用tomcat替代jetty -->
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <httpConnector>
+                        <port>81</port>
+                    </httpConnector>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.mortbay.util.URI.charset</name>
+                            <value>UTF-8</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--  编译部署文件名需要与artifact中out directory一致  -->
+        <finalName>item-ssm</finalName>
+        <!-- 编译需要指定编译源文件和编译输出目标目录，这里指定编译源文件 -->
+        <!-- 配置需编译文件目录，浏览器访问时的都是编译后的文件，所以如果访问的文件没有编译则会找不到资源 -->
+        <!-- 编译后的项目根目录是classes，在jetty:run中的项目访问时url一般都不需要项目名 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 该属性将filters指定的文件映射到app.properties中 -->
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+        </resources>
+        <!-- 指定具体profile作为当前环境配置 -->
+        <filters>
+            <filter>src/main/filters/env-${env}.properties</filter>
+        </filters>
+    </build>
+
     <!-- 配置开发、测试、生产环境 -->
     <profiles>
-
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <env>product</env>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

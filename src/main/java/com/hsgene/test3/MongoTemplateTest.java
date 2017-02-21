@@ -48,8 +48,14 @@ public class MongoTemplateTest {
     }
 
     @Test
-    public void testFind(){
+    public void testFindAll(){
         List<Employee> list = mongoTemplate.findAll(Employee.class, "EmployeeList");
         logger.info(JSON.toJSONString(list));
+    }
+
+    @Test
+    public void testFindById() {
+        Employee employee = mongoTemplate.findById("1234", Employee.class, "EmployeeList");
+        logger.info(JSON.toJSONString(employee));
     }
 }

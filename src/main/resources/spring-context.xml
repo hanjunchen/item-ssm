@@ -18,8 +18,10 @@
         <!-- @Service、@Resource、@Component等注解都由spring父容器来扫描，但是不能和子容器重复扫描@Controller，否则事务使用会出问题 -->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
     <!-- 读取properties配置文件，注意这里要设置system-properties-mode属性为FALLBACK，其默认为ENVIRONMENT，会先读取系统环境中的属性，再读取location指定文件中的属性，而username属性系统环境中也有，所以会先读取系统用户名 -->
-    <context:property-placeholder location="classpath:db.properties" system-properties-mode="FALLBACK"/>
+    <context:property-placeholder location="classpath:app.properties" system-properties-mode="FALLBACK"/>
+
     <!-- 配置spring线程池，提供多线程功能 -->
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <property name="corePoolSize" value="50" />
@@ -28,17 +30,19 @@
         <property name="queueCapacity" value="1000" />
         <property name="keepAliveSeconds" value="60" />
     </bean>
+
     <!-- spring计划任务配置，用 @Component @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
     <task:executor id="executor" pool-size="5"/>
     <task:scheduler id="scheduler" pool-size="10"/>
     <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
+
     <!-- 多种数据源：应用服务器自带数据源JNDI连接池、spring自带数据源DriverManagerDataSource不带连接池、等多种方式 -->
     <!-- 配置dbcp数据源，带连接池，指定应用停止后数据源销毁方法，数据源对象为单例 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
-        <property name="driverClassName" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${username}"/>
-        <property name="password" value="${password}"/>
+        <property name="driverClassName" value="${mysql.driver}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
         <property name="minIdle" value="3"/>
@@ -50,14 +54,17 @@
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="300000"/>
     </bean>
+
     <!-- 为事务管理配置数据源，通过@Transactional注解或AOP方式使用它 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
     <!-- 配置 Annotation 驱动，扫描@Transactional注解的类或方法  -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     <!-- 开启切面自动代理，作用同@EnableAspectJAutoProxy注解，目标对象无接口时使用cglib动态代理，否则使用JDK动态代理 -->
     <aop:aspectj-autoproxy/>
+
     <!-- 使用spring-mybatis的SqlSessionFactoryBean来整合mybatis，生成一个单例SqlSessionFactory，基于工厂模式 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -71,6 +78,7 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
     <!-- 此种方式使用mapperInterface属性代替SqlSessionFactoryBean中的mapperLocations属性 -->
     <!-- 该对象就是Dao的实现类，将其注入到Service类中使用，所以每个Dao都需要配置一个MapperFactoryBean，比较麻烦 -->
     <!-- 而且需要极为注意的是此种方法要求mapper.xml文件必须和mapper接口在同一个目录下，且除了后缀名名称必须一致，否则两者无法映射匹配 -->
