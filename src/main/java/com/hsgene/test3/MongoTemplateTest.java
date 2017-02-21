@@ -3,7 +3,6 @@ package com.hsgene.test3;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.hsgene.model.EmployeeModel;
-import com.hsgene.utils.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -34,15 +33,15 @@ public class MongoTemplateTest {
 
     @Test
     public void testInsert(){
-        EmployeeModel employeeModel = new EmployeeModel(){{setId("1111");setCreateDate(DateUtils.formatDateTime(new Date()));setJob("开发");}};
+        EmployeeModel employeeModel = new EmployeeModel(){{setId("1111");setCreateDate(new Date());setJob("开发");}};
         mongoTemplate.insert(employeeModel, "EmployeeList");
     }
 
     @Test
     public void testInsertBatch(){
         List<EmployeeModel> list = Lists.newArrayList();
-        EmployeeModel employee1 = new EmployeeModel(){{setId("2345");setCreateDate(DateUtils.formatDateTime(new Date()));setJob("开发");}};
-        EmployeeModel employee2 = new EmployeeModel(){{setId("4567");setCreateDate(DateUtils.formatDateTime(new Date()));setJob("测试");}};
+        EmployeeModel employee1 = new EmployeeModel(){{setId("2345");setCreateDate(new Date());setJob("开发");}};
+        EmployeeModel employee2 = new EmployeeModel(){{setId("4567");setCreateDate(new Date());setJob("测试");}};
         list.add(employee1);
         list.add(employee2);
         mongoTemplate.insert(list, "EmployeeList");
@@ -51,12 +50,12 @@ public class MongoTemplateTest {
     @Test
     public void testFindAll(){
         List<EmployeeModel> list = mongoTemplate.findAll(EmployeeModel.class, "EmployeeList");
-        logger.debug(JSON.toJSONString(list));
+        list.forEach(x-> System.out.println(x));
     }
 
     @Test
     public void testFindById() {
         EmployeeModel employeeModel = mongoTemplate.findById("2345", EmployeeModel.class, "EmployeeList");
-        logger.debug(JSON.toJSONString(employeeModel));
+        logger.info(JSON.toJSONString(employeeModel));
     }
 }
