@@ -497,12 +497,20 @@
             <resource>
                 <directory>src/main/java</directory>
             </resource>
+            <!-- 将filters指定的文件映射到app.properties -->
             <resource>
                 <directory>src/main/resources</directory>
-                <!-- 该属性将filters指定的文件映射到app.properties中 -->
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <!-- 禁用filters映射xml文件，如有其它类型文件，需单独添加规则 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xml</include>
                 </includes>
             </resource>
             <resource>

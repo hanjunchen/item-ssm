@@ -33,7 +33,7 @@ public class MongoTemplateTest {
 
     @Test
     public void testInsert(){
-        Employee employee = new Employee(){{setId(1234);setCreateDate(new Date());setJob("开发");}};
+        Employee employee = new Employee(){{setId(1111);setCreateDate(new Date());setJob("开发");}};
         mongoTemplate.insert(employee, "EmployeeList");
     }
 
