@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by hjc on 2016/11/11.
  */
-public class Pinyin4jUtil {
+public class Pinyin4jUtils {
 
     private static final HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
 

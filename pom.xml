@@ -501,7 +501,8 @@
                         <configuration>
                             <classesDirectory>${project.outputDirectory}</classesDirectory>
                             <finalName></finalName>
-                            <outputDirectory>${project.build.directory}/${project.artifactId}/WEB-INF/lib</outputDirectory>
+                            <outputDirectory>${project.build.directory}/${project.artifactId}/WEB-INF/lib
+                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -531,16 +532,13 @@
                 </configuration>
             </plugin>
 
-
-
         </plugins>
 
         <!--  编译部署文件名需要与artifact中out directory一致  -->
         <finalName>item-ssm</finalName>
 
         <!-- 编译需要指定编译源文件和编译输出目标目录，这里指定编译源文件 -->
-        <!-- 配置需编译文件目录，浏览器访问时的都是编译后的文件，所以如果访问的文件没有编译则会找不到资源 -->
-        <!-- 编译后的项目根目录是classes，在jetty:run中的项目访问时url一般都不需要项目名 -->
+        <!-- 配置需编译文件目录，浏览器访问时的都是编译后的文件，所以如果访问的文件没有编译则会找不到资源，编译后的项目根目录是classes -->
         <resources>
             <resource>
                 <directory>src/main/java</directory>

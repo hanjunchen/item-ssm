@@ -1,6 +1,6 @@
 package com.hsgene.test1;
 
-import com.hsgene.utils.Pinyin4jUtil;
+import com.hsgene.utils.Pinyin4jUtils;
 import org.junit.Test;
 
 /**
@@ -10,7 +10,7 @@ public class PinYinTest {
 
     @Test
     public void testPinYin(){
-        System.out.println(Pinyin4jUtil.chineseToSpell("中国"));
-        System.out.println(Pinyin4jUtil.chineseToFirstSpell("呵呵哒"));
+        System.out.println(Pinyin4jUtils.chineseToSpell("中国"));
+        System.out.println(Pinyin4jUtils.chineseToFirstSpell("呵呵哒"));
     }
 }
