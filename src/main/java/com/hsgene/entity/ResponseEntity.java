@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
 
 /**
  * Created by hjc on 2016/10/21.
@@ -16,7 +14,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class ResponseEntity {
 
-    private JSONObject jsonObject;
-    private HttpStatus httpStatus;
+    private String status;
+    private String message;
 
 }

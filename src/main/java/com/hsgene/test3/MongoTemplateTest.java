@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.Date;
 import java.util.List;
@@ -34,7 +36,7 @@ public class MongoTemplateTest {
     @Test
     public void testInsert(){
         EmployeeModel employeeModel = new EmployeeModel(){{setId("1111");setCreateDate(new Date());setJob("开发");}};
-        mongoTemplate.insert(employeeModel, "EmployeeList");
+        mongoTemplate.insert(employeeModel, "employeeList");
     }
 
     @Test
@@ -44,18 +46,24 @@ public class MongoTemplateTest {
         EmployeeModel employee2 = new EmployeeModel(){{setId("4567");setCreateDate(new Date());setJob("测试");}};
         list.add(employee1);
         list.add(employee2);
-        mongoTemplate.insert(list, "EmployeeList");
+        mongoTemplate.insert(list, "employeeList");
     }
 
     @Test
     public void testFindAll(){
-        List<EmployeeModel> list = mongoTemplate.findAll(EmployeeModel.class, "EmployeeList");
+        List<EmployeeModel> list = mongoTemplate.findAll(EmployeeModel.class, "employeeList");
         list.forEach(x-> System.out.println(x));
     }
 
     @Test
     public void testFindById() {
-        EmployeeModel employeeModel = mongoTemplate.findById("2345", EmployeeModel.class, "EmployeeList");
+        EmployeeModel employeeModel = mongoTemplate.findById("2345", EmployeeModel.class, "employeeList");
         logger.info(JSON.toJSONString(employeeModel));
+    }
+
+    @Test
+    public void testQuery(){
+        Query query = new Query();
+        query.addCriteria(new Criteria());
     }
 }

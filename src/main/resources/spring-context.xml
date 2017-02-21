@@ -103,5 +103,6 @@
 
     <import resource="classpath:/spring/spring-redis.xml"/>
     <import resource="classpath:/spring/spring-mongo.xml"/>
+    <import resource="classpath:/spring/spring-rest.xml"/>
 
 </beans>
