@@ -27,6 +27,7 @@ public class RestTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void testPost() {
+        Constant constant = new Constant();
         ResponseEntity responseEntity = restTemplate.postForObject(url, null, ResponseEntity.class, "");
         System.out.println(JSON.toJSONString(responseEntity));
     }
