@@ -48,7 +48,7 @@ public class SpringTest {
     @Test
     public void insert(){
         Employee employee = new Employee("小小", 1, "进货员", 3, "123456789012345678", 10, new Date());
-        employee.setId(2000);
+        employee.setId("2000");
         employeeService.insert(employee);
         System.out.println(employee.getId());
     }

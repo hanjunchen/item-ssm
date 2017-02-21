@@ -1,6 +1,7 @@
 package com.hsgene.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,7 +18,8 @@ public class Employee implements Serializable{
 
     private static final long serialVersionUID = 5330869888126501633L;
 
-    private Integer id;
+    @Id
+    private String id;
     private String name;
     private Integer sex;    //  性别字典在页面上转换显示
     private String job;
