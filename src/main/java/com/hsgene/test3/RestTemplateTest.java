@@ -1,6 +1,7 @@
 package com.hsgene.test3;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hsgene.common.Constant;
 import com.hsgene.entity.ResponseEntity;
 import org.junit.Test;
@@ -28,7 +29,8 @@ public class RestTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
     @Test
     public void testPost() {
         Constant constant = new Constant();
-        ResponseEntity responseEntity = restTemplate.postForObject(url, null, ResponseEntity.class, "");
+        String params = JSONObject.toJSONString("[{\"dcwId\":\"123\",\"fieldKey\":\"qwe\",\"id\":\"333\"},{\"dcwId\":\"456\",\"fieldKey\":\"asd\",\"id\":\"444\"}]");
+        ResponseEntity responseEntity = restTemplate.postForObject(url, params, ResponseEntity.class);
         System.out.println(JSON.toJSONString(responseEntity));
     }
 
