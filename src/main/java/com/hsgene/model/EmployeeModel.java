@@ -10,7 +10,6 @@ import java.util.Date;
 public class EmployeeModel implements Serializable {
 
     private static final long serialVersionUID = 8222469710111201442L;
-
     private String id;
     private String job;
     private Date createDate;
